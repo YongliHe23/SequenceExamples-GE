@@ -56,7 +56,7 @@ if reconstruct
     system('git clone --depth 1 git@github.com:JeffFessler/mirt.git');
     cd mirt; setup; cd ..;
 
-    subplot(121); im(im1);
-    subplot(122); im(im2);
+    subplot(121); im(im1); title('echo 1 (192x192, dwell = 20us)');
+    subplot(122); im(im2); title('echo 2 (48x192, dwell = 40us)');
 end
 
