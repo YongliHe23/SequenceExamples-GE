@@ -1,6 +1,5 @@
-% write2DGRE_multiADC.m
-%
-% Similar to ../2DGRE/, but acquires a second echo with different resolution.
+% write2DGRE.m
+% 2D RF-spoiled sequence. Acquires two echoes with different bandwidth and resolution.
 
 % System/design parameters.
 % Reduce gradients by 1/sqrt(3) to allow for oblique scans.
