@@ -11,3 +11,8 @@ create the pge sequence file, and reconstruct the data, see `main.m` in this fol
 
 For GE scan instructions, see https://github.com/jfnielsen/TOPPEpsdSourceCode/tree/UserGuide/v7
 
+The output of `main.m` is shown below.
+The images on the left and right are from the 1st and 2nd echoes, respectively.
+
+![Ball phantom](1.jpg)
+
