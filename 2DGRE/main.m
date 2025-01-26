@@ -1,5 +1,5 @@
 % actions
-createSequenceFile = false;
+createSequenceFile = true;
 reconstruct = true;
 
 if createSequenceFile
@@ -11,11 +11,11 @@ if createSequenceFile
     % Convert .seq file to a PulCeq (Ceq) object
     system('git clone --branch v2.1.2 git@github.com:HarmonizedMRI/PulCeq.git');
     addpath PulCeq/matlab
-    ceq = seq2ceq('gre2d_ma.seq');
-    writeceq(ceq, 'gre2d_ma.pge', 'pislquant', pislquant);
+    ceq = seq2ceq('gre2d.seq');
+    writeceq(ceq, 'gre2d.pge', 'pislquant', pislquant);
 end
 
-% Next, exeucte gre2d_ma.pge with the pge2 interpreter
+% Next, run gre2d.pge on a GE scanner using the pge2 interpreter.
 % See README.md
 
 if reconstruct

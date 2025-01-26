@@ -123,8 +123,8 @@ end
 
 %% Output for execution and plot
 seq.setDefinition('FOV', [fov fov sliceThickness]);
-seq.setDefinition('Name', 'gre2d_ma');
-seq.write('gre2d_ma.seq')       % Write to pulseq file
+seq.setDefinition('Name', 'gre2d');
+seq.write('gre2d.seq')       % Write to pulseq file
 
 seq.plot('timeRange', [0 3]*TR);
 
