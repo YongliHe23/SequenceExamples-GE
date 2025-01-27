@@ -1,6 +1,6 @@
 # 2D spoiled GRE sequence for Pulseq on GE v2 (pge2)
 
-Dual-echo 2D SPGR acquisition, with two different ADC events.
+Dual-echo 2D SPGR acquisition, with two different ADC events with different bandwidth and number of samples acquired.
 
 Tested on the following system:
 * GE MR750 
