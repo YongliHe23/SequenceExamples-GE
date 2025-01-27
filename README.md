@@ -29,10 +29,19 @@ https://github.com/jfnielsen/TOPPEpsdSourceCode/releases/
 
 ## Preparing a .seq file for GE
 
-### Add TRID labels
+### Define segments (block groups) by adding TRID labels
 
-Like tv6, add `TRID` labels to mark the beginning of each TR or sequence sub-module. 
-See the tv6 manual for details.
+We define a 'segment' as a consecutive sub-sequence of Pulseq blocks that are always executed together,
+such as a TR or a magnetization preparation section.
+The GE interpreter needs this information to construct the sequence.
+
+Therefore, like in tv6, you must add `TRID` labels to mark the beginning of each TR or sequence sub-module. 
+You can see how this is done in the examples included in this repository.
+See also the tv6 manual for further details.
+
+When creating a segment, **the interpreter inserts a 116us dead time at the end of each segment**.
+Please account for this when creating your .seq file.
+
 
 ### Set system hardware parameters
 
@@ -78,6 +87,9 @@ sys = mr.opts('maxGrad', 40, 'gradUnit','mT/m', ...
               'blockDurationRaster', 4e-6, ...
               'B0', 3.0);
 ```
+
+
+
 
 ## Converting the .seq file to a .pge file
 
