@@ -112,12 +112,12 @@ In MATLAB:
 system('git clone --branch v2.1.2 git@github.com:HarmonizedMRI/PulCeq.git');
 addpath PulCeq/matlab
 ceq = seq2ceq('gre2d.seq');
-pislquant = 10;               % number of ADC events at beginning of scan to use for receive gain calibration
-writeceq(ceq, 'gre2d.pge', 'pislquant', pislquant);   % write Ceq struct to file. This is what pge2 will load and run.
+pislquant = 10;               % number of ADC events at beginning of scan for receive gain calibration
+writeceq(ceq, 'gre2d.pge', 'pislquant', pislquant);   % write Ceq struct to file
 ```
 
 
-## Running the sequence on the scanner
+## Running the .pge file on the scanner
 
 The EPIC source code for the interpreter is available at 
 https://github.com/jfnielsen/TOPPEpsdSourceCode/releases/.
