@@ -94,6 +94,7 @@ sys = mr.opts('maxGrad', 40, 'gradUnit','mT/m', ...
 ### Sequence timing: Summary and further comments
 
 * When creating a segment, the interpreter inserts a 116us dead time at the end of each segment.
+* Event durations must be an integer multiple of 4us
 * The parameters `rfDeadTime`, `rfRingdownTime`, and `adcDeadTime` were included in the Pulseq MATLAB toolbox
 with Siemens scanners in mind, and as just discussed, setting them to 0 can in fact be a preferred option in many cases for GE users.
 This is because the default behavior in the Pulseq toolbox is to quietly insert corresponding gaps at the 
@@ -101,7 +102,7 @@ start end end of each block, however this is not necessary on GE since the block
 * In the internal sequence representation used by the interpreter, RF and ADC events are delayed by about 100us to account for gradient delays.
 Depending on the sequence details, you may need to extend the segment duration to account for this.
 
-The user guide pdf discusses these points in more detail.
+The Pulseq on GE v1 (tv6) user guide pdf discusses some of these points in more detail.
 
 
 ## Converting the .seq file to a .pge file
