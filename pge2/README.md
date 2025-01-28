@@ -1,20 +1,14 @@
-# Pulseq on GE examples for learning and testing
-
-**Updated January 2025**
+# Pulseq on GE v2 (pge2) examples 
 
 This repository contains examples of how to prepare and run Pulseq sequences
 on GE scanners using the 'Pulseq on GE v2' (pge2) interpreter.
-Each example has been tested on at least one GE scanner.
-
-If you discover a bug/problem with any of the examples, 
-please report it [here](https://github.com/HarmonizedMRI/SequenceExamples-GE/issues).
 
 
 ## Quick start
 
 We recommend starting with the example in [2DGRE](2DGRE).
 
-For information about accessing and using the interpreter, see information below.
+For information about accessing and using the pge2 interpreter, see information below.
 
 
 ## A note on software releases
