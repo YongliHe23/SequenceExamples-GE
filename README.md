@@ -5,9 +5,10 @@
 This repository contains examples of how to prepare and run Pulseq sequences
 on GE scanners using the community-developed Pulseq on GE interpreter[^1][^2].
 
-There are two versions of the interpreter available:
+There are three versions of the interpreter available:
 * tv6, the 'classic' TOPPE interpreter
 * pge2, Pulseq on GE v2
+* tv6 with MNS support
 
 If you discover a bug/problem with any of the examples, 
 please report it [here](https://github.com/HarmonizedMRI/SequenceExamples-GE/issues).

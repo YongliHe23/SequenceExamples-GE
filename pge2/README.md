@@ -40,8 +40,9 @@ Please account for this when creating your .seq file.
 ### Set system hardware parameters
 
 **Raster times:**  
-Unlike tv6, the waveforms in the .seq file are NOT interpolated to 4us, but are instead directly
-place onto the hardware. This is far more memory efficient and generally more accurate.
+Unlike tv6, the waveforms in the .seq file are NOT interpolated to 4us, but are instead
+placed directly onto the hardware. 
+This is far more memory efficient and generally more accurate.
 Therefore, the following raster time requirements must be met in the .seq file:
 * gradient raster time must be multiple of 4us
 * rf raster time must be multiple of 2us
@@ -49,6 +50,8 @@ Therefore, the following raster time requirements must be met in the .seq file:
 * In addition, it seems best to set block duration raster to 4us
 
 **Minimum gaps before and after RF/ADC events:**   
+Like on other vendors, there is some time required to turn on/off the RF amplifier and ADC card.
+To our knowledge, on GE these are:
 * Time to turn RF amplifier ON = 72us
 * Time to turn RF amplifier OFF = 54us
 * Time to turn ADC ON = 40us
