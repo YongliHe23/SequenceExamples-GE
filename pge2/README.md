@@ -23,6 +23,8 @@ https://github.com/jfnielsen/TOPPEpsdSourceCode/releases/
 
 ## Preparing a .seq file for the pge2 interpreter
 
+The key points to keep in mind when creating a .seq file for the pge2 interpreter are summarized here.
+
 ### Define segments (block groups) by adding TRID labels
 
 As in tv6, we define a 'segment' as a consecutive sub-sequence of Pulseq blocks that are always executed together,
@@ -89,7 +91,7 @@ sys = mr.opts('maxGrad', 40, 'gradUnit','mT/m', ...
 ```
 
 
-### Summary and Further comments on sequence timing
+### Sequence timing: Summary and further comments
 
 * When creating a segment, the interpreter inserts a 116us dead time at the end of each segment.
 * The parameters `rfDeadTime`, `rfRingdownTime`, and `adcDeadTime` were included in the Pulseq MATLAB toolbox
