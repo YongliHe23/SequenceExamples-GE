@@ -28,7 +28,8 @@ https://github.com/jfnielsen/TOPPEpsdSourceCode/tree/UserGuide/v6/examples
 ## Preparing a .seq file for tv6
 
 The key points to keep in mind when creating a .seq file for GE scanners are summarized here.
-For more details, see the user guide pdf.
+For more details, see the Pulseq on GE v1 user guide pdf.
+
 
 ### Define segments (block groups) by adding TRID labels
 
@@ -40,7 +41,7 @@ Therefore, you must add `TRID` labels to mark the beginning of each TR or sequen
 You can see how this is done in the examples included in this repository.
 See the tv6 manual for further details.
 
-When creating a segment, **the interpreter inserts a 116us dead time at the end of each segment**.
+When creating a segment, **the interpreter inserts a 116us dead time (gap) at the end of each segment**.
 Please account for this when creating your .seq file.
 
 
@@ -92,8 +93,9 @@ sys = mr.opts('maxGrad', 40, 'gradUnit','mT/m', ...
               'B0', 3.0);
 ```
 
-### Further comments on sequence timing
+### Summary and further comments on sequence timing
 
+* When creating a segment, the interpreter inserts a 116us dead time at the end of each segment.
 * The parameters `rfDeadTime`, `rfRingdownTime`, and `adcDeadTime` were included in the Pulseq MATLAB toolbox
 with Siemens scanners in mind, and as just discussed, setting them to 0 can in fact be a preferred option in many cases for GE users.
 This is because the default behavior in the Pulseq toolbox is to quietly insert corresponding gaps at the 

@@ -21,25 +21,28 @@ https://github.com/HarmonizedMRI/PulCeq/releases/
 https://github.com/jfnielsen/TOPPEpsdSourceCode/releases/ 
 
 
-## Preparing a .seq file for GE
+## Preparing a .seq file for the pge2 interpreter
 
 ### Define segments (block groups) by adding TRID labels
 
-We define a 'segment' as a consecutive sub-sequence of Pulseq blocks that are always executed together,
+As in tv6, we define a 'segment' as a consecutive sub-sequence of Pulseq blocks that are always executed together,
 such as a TR or a magnetization preparation section.
 The GE interpreter needs this information to construct the sequence.
 
-Therefore, like in tv6, you must add `TRID` labels to mark the beginning of each TR or sequence sub-module. 
+Therefore, you must add `TRID` labels to mark the beginning of each TR or sequence sub-module. 
 You can see how this is done in the examples included in this repository.
-See also the tv6 manual for further details.
+See also the Pulseq on GE v1 (tv6) manual.
 
-When creating a segment, **the interpreter inserts a 116us dead time at the end of each segment**.
+When creating a segment, **the interpreter inserts a 116us dead time (gap) at the end of each segment**.
 Please account for this when creating your .seq file.
 
 
 ### Set system hardware parameters
 
 **Raster times:**  
+Unlike tv6, the waveforms in the .seq file are NOT interpolated to 4us, but are instead directly
+place onto the hardware. This is far more memory efficient and generally more accurate.
+Therefore, the following raster time requirements must be met in the .seq file:
 * gradient raster time must be multiple of 4us
 * rf raster time must be multiple of 2us
 * adc raster time must be multiple of 2us
@@ -83,6 +86,17 @@ sys = mr.opts('maxGrad', 40, 'gradUnit','mT/m', ...
 ```
 
 
+### Summary and Further comments on sequence timing
+
+* When creating a segment, the interpreter inserts a 116us dead time at the end of each segment.
+* The parameters `rfDeadTime`, `rfRingdownTime`, and `adcDeadTime` were included in the Pulseq MATLAB toolbox
+with Siemens scanners in mind, and as just discussed, setting them to 0 can in fact be a preferred option in many cases for GE users.
+This is because the default behavior in the Pulseq toolbox is to quietly insert corresponding gaps at the 
+start end end of each block, however this is not necessary on GE since the block boundaries 'vanish' within a segment.
+* In the internal sequence representation used by the interpreter, RF and ADC events are delayed by about 100us to account for gradient delays.
+Depending on the sequence details, you may need to extend the segment duration to account for this.
+
+The user guide pdf discusses these points in more detail.
 
 
 ## Converting the .seq file to a .pge file
