@@ -93,7 +93,24 @@ sys = mr.opts('maxGrad', 40, 'gradUnit','mT/m', ...
               'B0', 3.0);
 ```
 
-### Summary and further comments on sequence timing
+
+### Add cardiac triggering
+
+1. Create a physio1 trigger event:
+```
+trig = mr.makeTrigger('physio1', 'duration', 20e-6);  % duration is ignored by GE interpreter
+```
+2. Add to any block, e.g.:
+```
+seq.addBlock(rf, gz, mr.makeLabel('SET', 'TRID', 1, trig);
+```
+
+Note:
+* Adding a physio1 event does not require a separate TRID label.
+* A segment is triggered as a whole, if one or more blocks within the segment contains a physio1 trigger event.
+
+
+### Sequence timing: Summary and further comments 
 
 * When creating a segment, the interpreter inserts a 116us dead time at the end of each segment.
 * The parameters `rfDeadTime`, `rfRingdownTime`, and `adcDeadTime` were included in the Pulseq MATLAB toolbox
