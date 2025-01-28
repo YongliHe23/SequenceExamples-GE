@@ -1,9 +1,9 @@
-createSequenceFile = false;
+createSequenceFile = true;
 reconstruct = true;
 
 if createSequenceFile
     % Get Pulseq toolbox and write gre2d.seq
-    system('git clone --depth 1 git@github.com:pulseq/pulseq.git');
+    system('git clone git@github.com:pulseq/pulseq.git');
     addpath pulseq/matlab
     write2DGRE;
 
