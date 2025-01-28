@@ -117,9 +117,9 @@ writeceq(ceq, 'gre2d.pge', 'pislquant', pislquant);   % write Ceq struct to file
 ```
 
 
-## The pge2 interpreter
+## Running the sequence on the scanner
 
-The EPIC source code is available at 
+The EPIC source code for the interpreter is available at 
 https://github.com/jfnielsen/TOPPEpsdSourceCode/releases/.
 
 For scan instructions, see https://github.com/jfnielsen/TOPPEpsdSourceCode/tree/UserGuide/v7
