@@ -2,6 +2,9 @@
 
 Dual-echo 2D SPGR acquisition, with two different ADC events with different bandwidth and number of samples acquired.
 
+For a traditional 2D SPGR sequence with only one ADC event, see
+https://github.com/jfnielsen/TOPPEpsdSourceCode/tree/UserGuide/v7/examples/2DGRE
+
 Tested on the following system:
 * GE MR750 
 * SW version MR30.1_R01
