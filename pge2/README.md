@@ -3,6 +3,18 @@
 This repository contains examples of how to prepare and run Pulseq sequences
 on GE scanners using the 'Pulseq on GE v2' (pge2) interpreter.
 
+Compared to tv6, the main features of the pge2 interpreter are:
+* Loads a single binary file. We suggest using the file extension '.pge' but this is not a requirement. 
+This file can be created with 
+[Pulserver](https://github.com/INFN-MRI/pulserver/),
+or with seq2ceq.m and writeceq.m, available here: https://github.com/HarmonizedMRI/PulCeq/.
+
+* Places the trapezoid, extended trapezoid, and arbitrary waveform events directly onto the hardware,
+  without first interpolating to 4us raster time as in the tv6 interpreter. 
+  This saves hardware memory and enables things like very long constant (CW) RF pulses.
+* Updated gradient heating and SAR/RF checks, based on sliding-window calculation.
+
+
 
 ## Quick start
 
@@ -21,7 +33,7 @@ https://github.com/HarmonizedMRI/PulCeq/releases/
 https://github.com/jfnielsen/TOPPEpsdSourceCode/releases/ 
 
 
-## Preparing a .seq file for the pge2 interpreter
+## Creating the .seq file
 
 The key points to keep in mind when creating a .seq file for the pge2 interpreter are summarized here.
 
@@ -119,22 +131,4 @@ writeceq(ceq, 'gre2d.pge', 'pislquant', pislquant);   % write Ceq struct to file
 
 ## Running the .pge file on the scanner
 
-The EPIC source code for the interpreter is available at 
-https://github.com/jfnielsen/TOPPEpsdSourceCode/releases/.
-
 For scan instructions, see https://github.com/jfnielsen/TOPPEpsdSourceCode/tree/UserGuide/v7
-
-For those familiar with the previous interpreter (tv6), the main changes are:
-
-* Loads a single binary file. We suggest using the file extension '.pge' but this is not a requirement. 
-This file can be created with 
-[Pulserver](https://github.com/INFN-MRI/pulserver/),
-or with seq2ceq.m and writeceq.m, available here: https://github.com/HarmonizedMRI/PulCeq/.
-
-* Preserves the trapezoid, extended trapezoid, and arbitrary waveform representations in the Pulseq file, 
-  which saves hardware memory and enables things like very long constant (CW) RF pulses.
-  (In tv6, every waveform was interpolated to 4us raster, which is limiting.)
-
-* Updated gradient heating and SAR/RF checks, based on sliding-window calculation (safety.e)
-
-
