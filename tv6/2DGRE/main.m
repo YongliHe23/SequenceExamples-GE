@@ -1,5 +1,5 @@
 createSequenceFile = true;
-reconstruct = true;
+reconstruct = false;
 
 if createSequenceFile
     % Get Pulseq toolbox and write gre2d.seq
@@ -8,7 +8,7 @@ if createSequenceFile
     write2DGRE;
 
     % Convert .seq file to a TOPPE tar-ball
-    system('git clone --branch v1.10.2 git@github.com:HarmonizedMRI/PulCeq.git');
+    system('git clone --branch v1.10.3 git@github.com:HarmonizedMRI/PulCeq.git');
     addpath PulCeq/matlab
     system('git clone --branch v1.9.1 git@github.com:toppeMRI/toppe.git');
     addpath toppe
@@ -23,9 +23,9 @@ if createSequenceFile
     seq2ge('gre2d.seq', sysGE, 'gre2d.tar');
 
     % plot TOPPE sequence files
-    system('tar xf gre2d.tar');
-    figure;
-    toppe.plotseq(sysGE, 'timeRange', [0 inf]);  % plot the whole sequence
+    % system('tar xf gre2d.tar');
+    % figure;
+    % toppe.plotseq(sysGE, 'timeRange', [0 inf]);  % plot the whole sequence
 end
 
 if reconstruct
