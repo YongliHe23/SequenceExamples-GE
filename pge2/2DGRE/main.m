@@ -4,7 +4,7 @@ reconstruct = true;
 
 if createSequenceFile
     % create .seq file
-    system('git clone --depth 1 git@github.com:pulseq/pulseq.git');
+    system('git clone git@github.com:pulseq/pulseq.git');
     addpath pulseq/matlab
     write2DGRE;   % writes .seq file, and sets pislquant
 
