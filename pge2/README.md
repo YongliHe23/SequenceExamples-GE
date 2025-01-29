@@ -99,6 +99,7 @@ sys = mr.opts('maxGrad', 40, 'gradUnit','mT/m', ...
 Note, however, that it may be possible to set some or all of the various dead- and ringdown times to 0
 as long as there is a gap in the previous/subsequent block to allow time 
 to turn on/off RF and ADC events.
+This is because the block boundaries 'disappear' inside a segment.
 If you know this to be the case, you may want to try the following, more time-efficient, alternative:
 
 ```
@@ -113,13 +114,13 @@ sys = mr.opts('maxGrad', 40, 'gradUnit','mT/m', ...
               'blockDurationRaster', 4e-6, ...
               'B0', 3.0);
 ```
-If this results in overlapping RF/ADC dead/ringdown times, you can then adjust the timing as needed
+If this results in overlapping RF/ADC dead/ringdown times, you would then adjust the timing as needed
 by modifying the event delays and block durations when creating the .seq file.
 
 
 ### Sequence timing: Summary and further comments
 
-* When creating a segment, the interpreter inserts a 116us dead time at the end of each segment.
+* When loading a segment, the interpreter inserts a 116us dead time at the end of each segment.
 * The parameters `rfDeadTime`, `rfRingdownTime`, and `adcDeadTime` were included in the Pulseq MATLAB toolbox
 with Siemens scanners in mind, and as just discussed, setting them to 0 can in fact be a preferred option in many cases for GE users.
 This is because the default behavior in the Pulseq toolbox is to quietly insert corresponding gaps at the 

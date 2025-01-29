@@ -61,6 +61,17 @@ To our knowledge, on GE these are:
 * Time to turn ADC ON = 40us
 * Time to turn ADC OFF = 0us
 
+The key thing to note is that the dead/ringdown intervals from one RF/ADC event must not overlap with those from another RF/ADC event.
+
+Also note that these times do NOT necessarily correspond to the values of `rfDeadTime`, `rfRingdownTime`, and `adcDeadTime`
+you should use when creating the .seq file.
+While the Pulseq MATLAB toolbox encourages the insertion of RF/ADC dead/ringdown times at the beginning
+and end of each block, this is generally not necessary on GE,
+and it is perfectly ok to override that behavior to make the sequence more time-efficient.
+See the `sys` struct example next.
+
+
+
 **Examples:**
 ```
 sys = mr.opts('maxGrad', 40, 'gradUnit','mT/m', ...
@@ -92,6 +103,8 @@ sys = mr.opts('maxGrad', 40, 'gradUnit','mT/m', ...
               'blockDurationRaster', 10e-6, ...
               'B0', 3.0);
 ```
+If this results in overlapping RF/ADC dead/ringdown times, you would then adjust the timing as needed
+by modifying the event delays and block durations when creating the .seq file.
 
 
 ### Add cardiac triggering
@@ -112,7 +125,7 @@ Note:
 
 ### Sequence timing: Summary and further comments 
 
-* When creating a segment, the interpreter inserts a 116us dead time at the end of each segment.
+* When loading a segment, the interpreter inserts a 116us dead time at the end of each segment.
 * The parameters `rfDeadTime`, `rfRingdownTime`, and `adcDeadTime` were included in the Pulseq MATLAB toolbox
 with Siemens scanners in mind, and as just discussed, setting them to 0 can in fact be a preferred option in many cases for GE users.
 This is because the default behavior in the Pulseq toolbox is to quietly insert corresponding gaps at the 
