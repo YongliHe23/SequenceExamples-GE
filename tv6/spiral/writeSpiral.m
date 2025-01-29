@@ -190,7 +190,6 @@ for s=1:Nslices
     %seq.addBlock(gx_combined,gy_combined,gz_combined,adc);
 end
 
-return
 
 % check whether the timing of the sequence is correct
 [ok, error_report]=seq.checkTiming;
