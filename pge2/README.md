@@ -66,10 +66,22 @@ Therefore, the following raster time requirements must be met in the .seq file:
 **Minimum gaps before and after RF/ADC events:**   
 Like on other vendors, there is some time required to turn on/off the RF amplifier and ADC card.
 To our knowledge, on GE these are:
-* Time to turn RF amplifier ON = 72us
-* Time to turn RF amplifier OFF = 54us
-* Time to turn ADC ON = 40us
-* Time to turn ADC OFF = 0us
+```
+Time to turn RF amplifier ON = 72us             # RF dead time
+Time to turn RF amplifier OFF = 54us            # RF ringdown time
+Time to turn ADC ON = 40us                      # ADC dead time
+Time to turn ADC OFF = 0us
+```
+
+The key thing to note is that the dead/ringdown intervals from one RF/ADC event must not overlap with those from another RF/ADC event.
+
+Also note that these times do NOT necessarily correspond to the values of `rfDeadTime`, `rfRingdownTime`, and `adcDeadTime`
+you should use when creating the .seq file.
+While the Pulseq MATLAB toolbox encourages the insertion of RF/ADC dead/ringdown times at the beginning
+and end of each block, this is generally not necessary on GE,
+and it is perfectly ok to override that behavior to make the sequence more time-efficient.
+See the `sys` struct example next.
+
 
 **Examples:**
 ```
@@ -87,6 +99,7 @@ sys = mr.opts('maxGrad', 40, 'gradUnit','mT/m', ...
 Note, however, that it may be possible to set some or all of the various dead- and ringdown times to 0
 as long as there is a gap in the previous/subsequent block to allow time 
 to turn on/off RF and ADC events.
+This is because the block boundaries 'disappear' inside a segment.
 If you know this to be the case, you may want to try the following, more time-efficient, alternative:
 
 ```
@@ -101,11 +114,13 @@ sys = mr.opts('maxGrad', 40, 'gradUnit','mT/m', ...
               'blockDurationRaster', 4e-6, ...
               'B0', 3.0);
 ```
+If this results in overlapping RF/ADC dead/ringdown times, you would then adjust the timing as needed
+by modifying the event delays and block durations when creating the .seq file.
 
 
 ### Sequence timing: Summary and further comments
 
-* When creating a segment, the interpreter inserts a 116us dead time at the end of each segment.
+* When loading a segment, the interpreter inserts a 116us dead time at the end of each segment.
 * The parameters `rfDeadTime`, `rfRingdownTime`, and `adcDeadTime` were included in the Pulseq MATLAB toolbox
 with Siemens scanners in mind, and as just discussed, setting them to 0 can in fact be a preferred option in many cases for GE users.
 This is because the default behavior in the Pulseq toolbox is to quietly insert corresponding gaps at the 
