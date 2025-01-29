@@ -8,8 +8,9 @@ if createSequenceFile
     writeSpiral;
 
     % Convert .seq file to a TOPPE tar-ball
-    system('git clone --branch v1.10.3 git@github.com:HarmonizedMRI/PulCeq.git');
+    system('git clone --branch v1.10.4 git@github.com:HarmonizedMRI/PulCeq.git');
     addpath PulCeq/matlab
+    %addpath ~/github/HarmonizedMRI/PulCeq/matlab
     system('git clone --branch v1.9.1 git@github.com:toppeMRI/toppe.git');
     addpath toppe
 
@@ -23,9 +24,9 @@ if createSequenceFile
     seq2ge('spiral.seq', sysGE, 'spiral.tar');
 
     % plot TOPPE sequence files
-    % system('tar xf gre2d.tar');
-    % figure;
-    % toppe.plotseq(sysGE, 'timeRange', [0 inf]);  % plot the whole sequence
+    system('tar xf spiral.tar');
+    figure;
+    toppe.plotseq(sysGE, 'timeRange', [0 inf]);  % plot the whole sequence
 end
 
 if reconstruct

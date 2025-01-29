@@ -1,21 +1,35 @@
-% this is an experimental spiral sequence
+% Adapt https://github.com/pulseq/pulseq/blob/master/matlab/demoSeq/writeSpiral.m
+% to tv6 interpreter for GE
+%
+% Key changes:
+%  * Add TRID label
+%  * ADC raster time = 2us
+%  * Adjust duration of spiral gradient and block boundaries to lie to 4us boundary
 
-fov=256e-3; Nx=96; Ny=Nx;  % Define FOV and resolution
-sliceThickness=3e-3;             % slice thinckness
+fov=256e-3; Nx=96; Ny=Nx;        % Define FOV and resolution
+sliceThickness=3e-3;             % slice thickness
 Nslices=1;
 Oversampling=2; % by looking at the periphery of the spiral I would say it needs to be at least 2
 phi=pi/2; % orientation of the readout e.g. for interleaving
 
 % Set system limits
-sys = mr.opts('MaxGrad',30,'GradUnit','mT/m',...
-    'MaxSlew',120,'SlewUnit','T/m/s',...
-    'rfRingdownTime', 30e-6, 'rfDeadtime', 100e-6, 'adcDeadTime', 10e-6, 'adcSamplesLimit', 8192);  
-seq=mr.Sequence(sys);          % Create a new sequence object
+% For tv6, just use default RF and gradient raster times (1us and 10us, respectively),
+% since seq2ge.m will interpolate all waveforms to 4us raster time anyway,
+% and since the Pulseq toolbox seems to have been more fully tested with these default settings.
+% After creating the events, we'll do a bit of surgery below to make sure everything
+% falls on 4us boundaries
+sys = mr.opts('MaxGrad',30, 'GradUnit', 'mT/m',...
+    'MaxSlew', 120, 'SlewUnit', 'T/m/s',...
+    'rfDeadTime', 100e-6, ...
+    'rfRingdownTime', 60e-6, ...
+    'adcDeadTime', 40e-6); % , 'adcSamplesLimit', 8192);  
+
+seq = mr.Sequence(sys);          % Create a new sequence object
 warning('OFF', 'mr:restoreShape'); % restore shape is not compatible with spirals and will throw a warning from each plot() or calcKspace() call
 
 % Create fat-sat pulse 
 % (in Siemens interpreter from January 2019 duration is limited to 8.192 ms, and although product EPI uses 10.24 ms, 8 ms seems to be sufficient)
-B0=2.89; % 1.5 2.89 3.0
+B0=3.0; % 2.89; % 1.5 2.89 3.0
 sat_ppm=-3.45;
 sat_freq=sat_ppm*1e-6*B0*sys.gamma;
 rf_fs = mr.makeGaussPulse(110*pi/180,'system',sys,'Duration',8e-3,...
@@ -144,16 +158,39 @@ gy_spoil=mr.makeExtendedTrapezoid('y','times',[0 mr.calcDuration(gz_spoil)],'amp
 % gx_combined=mr.addGradients([gx,gx_spoil], lims);
 % gy_combined=mr.addGradients([gy,gy_spoil], lims);
 % gz_combined=mr.addGradients([gzReph,gz_spoil], lims);
+
+%% Start GE adaptations
+% Ok, so far we haven't changed much except the RF/ADC dead/ringdown times and the ADC raster time.
+% Now let's make sure the timing (delays, durations) are on a 4us boundary
+% as required by the tv6 interpreter.
+% We do this by adding samples until waveforms end on a 4us boundary including the delay at start of block.
+% We do the same with the total block duration.
+
+commonRasterTime = 20e-6;
+gz_fs = trap4ge(gz_fs, commonRasterTime, sys);
+gz = trap4ge(gz, commonRasterTime, sys);
+
+% fix fat-sat pulse if needed
+GEraster = 4;   % us
+n = round(mr.calcDuration(rf_fs)/sys.rfRasterTime*1e6);
+
+
+
+
+%% end GE adapations (except for TRID below)
  
 % Define sequence blocks
+phi = 0;
 for s=1:Nslices
-    seq.addBlock(rf_fs,gz_fs); % fat-sat    
-    rf.freqOffset=gz.amplitude*sliceThickness*(s-1-(Nslices-1)/2);
-    seq.addBlock(rf,gz);
+    seq.addBlock(rf_fs,gz_fs, mr.makeLabel('SET', 'TRID', 1)); % fat-sat      % adding the TRID label needed by the GE interpreter
+    rf.freqOffset = 0; %gz.amplitude*sliceThickness*(s-1-(Nslices-1)/2);
+    seq.addBlock(rf, gz);
     seq.addBlock(mr.rotate('z',phi,gzReph,gx,gy,adc));
     seq.addBlock(mr.rotate('z',phi,gx_spoil,gy_spoil,gz_spoil));
     %seq.addBlock(gx_combined,gy_combined,gz_combined,adc);
 end
+
+return
 
 % check whether the timing of the sequence is correct
 [ok, error_report]=seq.checkTiming;
