@@ -11,5 +11,10 @@ Tested on the following system:
 * SW version MR30.1_R01
 * Pulseq interpreter tv6 [v1.9.1](https://github.com/jfnielsen/TOPPEpsdSourceCode/releases/tag/v1.9.1)
 
-See [main.m](main.m) for steps required to prepare the sequence file and reconstruct.
+See [main.m](main.m) for steps required to prepare the TOPPE sequence file and plot it.
 
+TOPPE sequence plotted in MATLAB with `toppe.plotseq()`:
+![toppe.plotseq](matlab.png)
+
+TOPPE sequence simulated in GE's Pulse Studio (WTools) simulator:
+![simulator](pulsestudio.png)

@@ -8,7 +8,7 @@ if createSequenceFile
     writeSpiral;
 
     % Convert .seq file to a TOPPE tar-ball
-    system('git clone --branch v1.10.4 git@github.com:HarmonizedMRI/PulCeq.git');
+    system('git clone --branch v1.10.5 git@github.com:HarmonizedMRI/PulCeq.git');
     addpath PulCeq/matlab
     %addpath ~/github/HarmonizedMRI/PulCeq/matlab
     system('git clone --branch v1.9.1 git@github.com:toppeMRI/toppe.git');
@@ -38,26 +38,5 @@ if reconstruct
 
     d = toppe.utils.loadsafile('mydata.h5', 'acq_order', true); %, 'version', 'tv6');
 
-    % discard data during receive gain calibration (see write2DGRE.m)
-    pislquant = 10;
-    d = d(:,:, (pislquant+1):end);   
-
-    d = permute(d, [1 3 2]);   % [Nx Ny ncoils]
-
-    [nx, ny, ncoil] = size(d);
-
-    % reconstruct complex coil images
-    clear ims
-    for ic = 1:ncoil
-        ims(:,:,ic) = fftshift(ifftn(fftshift(d(:,:,ic))));
-    end
-
-    if ndims(d) > 2
-        I = sqrt(sum(abs(ims).^2, ndims(d)));   % root sum of squares coil combination
-    else
-        I = abs(ims);
-    end
-
-    % Display. Requires MIRT toolbox, https://github.com/JeffFessler/mirt
-    figure; im(flipdim(I', 1));   % to match orientation of object on console UI
+    % TODO: do gridding recon
 end

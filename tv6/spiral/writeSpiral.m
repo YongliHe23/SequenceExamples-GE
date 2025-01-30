@@ -4,13 +4,16 @@
 % Key changes:
 %  * Add TRID label
 %  * ADC raster time = 2us
-%  * Adjust duration of spiral gradient and block boundaries to lie to 4us boundary
+%  * Adjust timing so that durations and edge points lie on a 20us boundary (commonRasterTime).
+%    This is done by wrapping gradient events in trap4ge/arb4ge/exttrap4ge calls.
 
-fov=256e-3; Nx=96; Ny=Nx;        % Define FOV and resolution
+commonRasterTime = 20e-6;
+
+fov=256e-3; Nx=64; Ny=Nx;        % Define FOV and resolution
 sliceThickness=3e-3;             % slice thickness
 Nslices=1;
 Oversampling=2; % by looking at the periphery of the spiral I would say it needs to be at least 2
-phi=pi/2; % orientation of the readout e.g. for interleaving
+phi = 0*pi/2; % orientation of the readout e.g. for interleaving
 
 % Set system limits
 % For tv6, just use default RF and gradient raster times (1us and 10us, respectively),
@@ -22,7 +25,8 @@ sys = mr.opts('MaxGrad',30, 'GradUnit', 'mT/m',...
     'MaxSlew', 120, 'SlewUnit', 'T/m/s',...
     'rfDeadTime', 100e-6, ...
     'rfRingdownTime', 60e-6, ...
-    'adcDeadTime', 40e-6); % , 'adcSamplesLimit', 8192);  
+    'adcRasterTime', 2e-6, ...
+    'adcDeadTime', 0e-6); % , 'adcSamplesLimit', 8192);  
 
 seq = mr.Sequence(sys);          % Create a new sequence object
 warning('OFF', 'mr:restoreShape'); % restore shape is not compatible with spirals and will throw a warning from each plot() or calcKspace() call
@@ -34,11 +38,15 @@ sat_ppm=-3.45;
 sat_freq=sat_ppm*1e-6*B0*sys.gamma;
 rf_fs = mr.makeGaussPulse(110*pi/180,'system',sys,'Duration',8e-3,...
     'bandwidth',abs(sat_freq),'freqOffset',sat_freq);
-gz_fs = mr.makeTrapezoid('z',sys,'delay',mr.calcDuration(rf_fs),'Area',1/1e-4); % spoil up to 0.1mm
+gz_fs = mr.makeTrapezoid('z',sys,'delay',mr.calcDuration(rf_fs),'Area',1/0.3e-3); % spoil up to 0.3mm
+gz_fs = trap4ge(gz_fs, commonRasterTime, sys);
 
 % Create 90 degree slice selection pulse and gradient
 [rf, gz] = mr.makeSincPulse(pi/2,'system',sys,'Duration',3e-3,...
     'SliceThickness',sliceThickness,'apodization',0.5,'timeBwProduct',4);
+gz = trap4ge(gz, commonRasterTime, sys);
+gzReph = mr.makeTrapezoid('z',sys,'Area',-gz.area/2);
+gzReph = trap4ge(gzReph, commonRasterTime, sys);
 
 % define k-space parameters
 deltak=1/fov;
@@ -101,10 +109,6 @@ figure;plot([sor;abs(sor(1,:)+1i*sor(2,:))]');title('slew rate with rough (compo
 
 % Define gradients and ADC events
 spiral_grad_shape=gos;
-% Create 90 degree slice selection pulse and gradient
-[rf, gz] = mr.makeSincPulse(pi/2,'system',sys,'Duration',3e-3,...
-    'SliceThickness',sliceThickness,'apodization',0.5,'timeBwProduct',4);
-gzReph = mr.makeTrapezoid('z',sys,'Area',-gz.area/2);
 
 % calculate ADC
 % round-down dwell time to 10 ns
@@ -140,12 +144,17 @@ spiral_grad_shape = [spiral_grad_shape spiral_grad_shape(:,end)];
 
 % readout grad 
 gx = mr.makeArbitraryGrad('x',spiral_grad_shape(1,:),'Delay',mr.calcDuration(gzReph));
+gx = arb4ge(gx, commonRasterTime, sys);
 gy = mr.makeArbitraryGrad('y',spiral_grad_shape(2,:),'Delay',mr.calcDuration(gzReph));
+gy = arb4ge(gy, commonRasterTime, sys);
 
 % spoilers
 gz_spoil=mr.makeTrapezoid('z',sys,'Area',deltak*Nx*4);
+gz_spoil = trap4ge(gz_spoil, commonRasterTime, sys);
 gx_spoil=mr.makeExtendedTrapezoid('x','times',[0 mr.calcDuration(gz_spoil)],'amplitudes',[spiral_grad_shape(1,end),0]); %todo: make a really good spoiler
+gx_spoil = exttrap4ge(gx_spoil, commonRasterTime, sys);
 gy_spoil=mr.makeExtendedTrapezoid('y','times',[0 mr.calcDuration(gz_spoil)],'amplitudes',[spiral_grad_shape(2,end),0]); %todo: make a really good spoiler
+gy_spoil = exttrap4ge(gy_spoil, commonRasterTime, sys);
 
 % because of the ADC alignment requirements the sampling window possibly
 % extends past the end of the trajectory (these points will have to be
@@ -159,28 +168,7 @@ gy_spoil=mr.makeExtendedTrapezoid('y','times',[0 mr.calcDuration(gz_spoil)],'amp
 % gy_combined=mr.addGradients([gy,gy_spoil], lims);
 % gz_combined=mr.addGradients([gzReph,gz_spoil], lims);
 
-%% Start GE adaptations
-% Ok, so far we haven't changed much except the RF/ADC dead/ringdown times and the ADC raster time.
-% Now let's make sure the timing (delays, durations) are on a 4us boundary
-% as required by the tv6 interpreter.
-% We do this by adding samples until waveforms end on a 4us boundary including the delay at start of block.
-% We do the same with the total block duration.
-
-commonRasterTime = 20e-6;
-gz_fs = trap4ge(gz_fs, commonRasterTime, sys);
-gz = trap4ge(gz, commonRasterTime, sys);
-
-% fix fat-sat pulse if needed
-GEraster = 4;   % us
-n = round(mr.calcDuration(rf_fs)/sys.rfRasterTime*1e6);
-
-
-
-
-%% end GE adapations (except for TRID below)
- 
 % Define sequence blocks
-phi = 0;
 for s=1:Nslices
     seq.addBlock(rf_fs,gz_fs, mr.makeLabel('SET', 'TRID', 1)); % fat-sat      % adding the TRID label needed by the GE interpreter
     rf.freqOffset = 0; %gz.amplitude*sliceThickness*(s-1-(Nslices-1)/2);
@@ -189,7 +177,6 @@ for s=1:Nslices
     seq.addBlock(mr.rotate('z',phi,gx_spoil,gy_spoil,gz_spoil));
     %seq.addBlock(gx_combined,gy_combined,gz_combined,adc);
 end
-
 
 % check whether the timing of the sequence is correct
 [ok, error_report]=seq.checkTiming;
