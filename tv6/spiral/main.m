@@ -2,7 +2,7 @@ createSequenceFile = true;
 reconstruct = false;
 
 if createSequenceFile
-    % Get Pulseq toolbox and write gre2d.seq
+    % Get Pulseq toolbox and write spiral.seq
     system('git clone git@github.com:pulseq/pulseq.git');
     addpath pulseq/matlab
     writeSpiral;
@@ -23,7 +23,9 @@ if createSequenceFile
 
     seq2ge('spiral.seq', sysGE, 'spiral.tar');
 
-    % plot TOPPE sequence files
+    % Plot TOPPE sequence files.
+    % This is done by first untarring the files in the current working directory,
+    % then calling toppe.plotseq() which will load and display those files.
     system('tar xf spiral.tar');
     figure;
     toppe.plotseq(sysGE, 'timeRange', [0 inf]);  % plot the whole sequence
