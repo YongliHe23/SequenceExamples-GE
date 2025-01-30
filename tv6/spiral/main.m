@@ -8,7 +8,7 @@ if createSequenceFile
     writeSpiral;
 
     % Convert .seq file to a TOPPE tar-ball
-    system('git clone --branch v1.10.5 git@github.com:HarmonizedMRI/PulCeq.git');
+    system('git clone --branch v1.10.6 git@github.com:HarmonizedMRI/PulCeq.git');
     addpath PulCeq/matlab
     %addpath ~/github/HarmonizedMRI/PulCeq/matlab
     system('git clone --branch v1.9.1 git@github.com:toppeMRI/toppe.git');
