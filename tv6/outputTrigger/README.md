@@ -1,9 +1,11 @@
 # 2D spoiled GRE sequence for tv6 (Pulseq on GE v1) with DABOUT output trigger/TTL pulse
 
-Tested on the following system:
+Currently testing on the following system:
 * GE MR750 
 * SW version MR30.1_R01
 * Pulseq interpreter tv6 [v1.9.1](https://github.com/jfnielsen/TOPPEpsdSourceCode/releases/tag/v1.9.1)
+
+Result: TTL trigger on DABOUT6/J6 (CV7 = 6) works, but other channels don't seem to.
 
 See [main.m](main.m).
 
@@ -22,4 +24,9 @@ Note:
 When simulating in WTools/PulseStudio, you can see the two trigger-related SSP pulses 
 (trigon and trigoff)
 at about 200us and 700us from the beginning of the TR, respectively:
-![Ball phantom](pulsestudio.png)
+![Pulse Studio](pulsestudio.png)
+
+When selecting channel 6 (CV7 = 6), the output on J6 is a 500us pulse as seen in the 2nd channel on this scope trace:
+
+![Oscilloscope](scope.jpg)
+
