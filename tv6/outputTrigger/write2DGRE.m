@@ -56,10 +56,10 @@ assert(all(delayTR >= mr.calcDuration(gxSpoil, gzSpoil)));
 
 % trigger out object starting 200us after start of block
 % Delay the rf accordingly
-trigPosition = 200e-6;
-trigDuration = 500e-6;   % this is controlled by the 'trigdur' CV (control variable) in the interpreter. Default = 500us
+trigPosition = 200e-6;  % this number will show up in modules.txt
+trigdur = 500e-6;   % this is controlled by the 'trigdur' CV (control variable) in the interpreter. Default = 500us
 trig_out = mr.makeDigitalOutputPulse('ext1', 'delay', trigPosition);
-extraDelay = trigPosition + trigDuration + 20e-6;   % add 20us buffer
+extraDelay = trigPosition + trigdur + 20e-6;   % add 20us buffer
 rf.delay = rf.delay + extraDelay;
 gz.delay = gz.delay + extraDelay;
 
