@@ -1,8 +1,6 @@
-# Spiral sequence for Pulseq on GE 
+# Spiral sequence for Pulseq on GE (tv6 and pge2)
 
 Interleaved 2D spiral.  
-
-Author: Florian Wiesinger
 
 Tested on the following system(s):
 * GE UHP

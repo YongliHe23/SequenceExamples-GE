@@ -1,11 +1,7 @@
-% Adapt https://github.com/pulseq/pulseq/blob/master/matlab/demoSeq/writeSpiral.m
-% to tv6 interpreter for GE
+% Author: Florian Wiesinger
 %
-% Key changes:
+% Key changes for GE:
 %  * Add TRID label
-%  * ADC raster time = 2us
-%  * Adjust timing so that durations and edge points lie on a 20us boundary (commonRasterTime).
-%    This is done by wrapping gradient events in trap4ge/arb4ge/exttrap4ge calls.
 
 dtDelay=1e-3;  % extra delay
 fov=200e-3; mtx=128; Nx=mtx; Ny=mtx;        % Define FOV and resolution
