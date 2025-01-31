@@ -1,6 +1,6 @@
 # 2D spoiled GRE sequence for tv6 (Pulseq on GE v1) with DABOUT output trigger/TTL pulse
 
-This example is incomplete.
+This example is work in progress.
 
 Currently testing on the following system:
 * GE MR750 
