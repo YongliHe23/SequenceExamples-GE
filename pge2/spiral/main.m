@@ -2,7 +2,7 @@
 createSequenceFile = true;
 reconstruct = false;
 
-version = 'tv6';   % 'tv6' or 'pge2'
+version = 'pge2';   % 'tv6' or 'pge2'
 
 if createSequenceFile
     % write spiral.seq
