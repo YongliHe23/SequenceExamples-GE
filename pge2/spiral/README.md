@@ -14,4 +14,4 @@ For GE scan instructions, see https://github.com/jfnielsen/TOPPEpsdSourceCode/tr
 
 ## Issues, troubleshooting
 
-* Auto prescan fails when Nint >= 8, reason is unknown.
+* Auto prescan fails when Nint >= 8 and mtx=128, reason is unknown.
