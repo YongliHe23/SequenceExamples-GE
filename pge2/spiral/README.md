@@ -1,11 +1,10 @@
-# Spiral sequence for Pulseq on GE (tv6 and pge2)
+# Spiral sequence for Pulseq on GE v2 (pge2)
 
 Interleaved 2D spiral.  
 
 Tested on the following system(s):
 * GE UHP
 * SW version MR30.1_R01
-* Pulseq interpreter tv6 v1.9.1, available at https://github.com/jfnielsen/TOPPEpsdSourceCode/releases/tag/v1.9.1
 * Pulseq interpreter pge2 (tv7) v2.2.0, available at https://github.com/jfnielsen/TOPPEpsdSourceCode/releases/tag/v2.2.0
 
 To download the required MATLAB packages,
@@ -15,4 +14,4 @@ For GE scan instructions, see https://github.com/jfnielsen/TOPPEpsdSourceCode/tr
 
 ## Issues, troubleshooting
 
-* Auto prescan fails for pge2 when Nint = 8, reason is unknown.
+* Auto prescan fails when Nint >= 8, reason is unknown.
