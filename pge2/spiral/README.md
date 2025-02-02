@@ -3,7 +3,7 @@
 Interleaved 2D spiral.  
 
 Tested on the following system(s):
-* GE UHP
+* GE MR750
 * SW version MR30.1_R01
 * Pulseq interpreter pge2 (tv7) v2.2.0, available at https://github.com/jfnielsen/TOPPEpsdSourceCode/releases/tag/v2.2.0
 
