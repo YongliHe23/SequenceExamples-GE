@@ -50,6 +50,10 @@ See also the Pulseq on GE v1 (tv6) manual.
 When creating a segment, **the interpreter inserts a 116us dead time (gap) at the end of each segment**.
 Please account for this when creating your .seq file.
 
+At present, **each segment must contain at least one gradient event**.
+Otherwise, the gradient heating check done by the pge2 interpreter may fail.
+To disable the gradient heating check, set the CV `disableGradientCheck` to 1 on the console (user CVs screen).
+
 
 ### Set system hardware parameters
 
