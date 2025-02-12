@@ -167,10 +167,14 @@ Possible causes:
 * The number of rows in the .seq file exceeds NMAXBLOCKSFORGRADHEATCHECK which is hardcoded to 64000.
  Design a shorter scan and see if it will run, or increase NMAXBLOCKSFORGRADHEATCHECK (requires recompiling the interpreter).
 * One or more segments does not contain at least one gradient waveform, as required by the gradient heating check.
+ Redesign your scan.
+
+For debugging, it can be helpful to disable the gradient heating check by setting the CV **disableGradientCheck** to 1.
+
 
 ### Gradient heating check fails on the scanner when clicking 'Download'
 
 * If the sequence contains pure delay blocks, the gradient heating check will generally be too conservative and may issue a failure.
  As a workaround for now, redesign a test version of your sequence without pure delay blocks and see if it will pass the gradient heating check.
- Then in your actual scan, disable the gradient heating check by setting the CV disableGradientCheck to 1.
+ Then in your actual scan, disable the gradient heating check by setting disableGradientCheck to 1.
 
