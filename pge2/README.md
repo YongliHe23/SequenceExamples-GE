@@ -157,3 +157,17 @@ writeceq(ceq, 'gre2d.pge', 'pislquant', pislquant);   % write Ceq struct to file
 ## Running the .pge file on the scanner
 
 For scan instructions, see https://github.com/jfnielsen/TOPPEpsdSourceCode/tree/UserGuide/v7
+
+
+## Troubleshooting tips
+
+### The sequence fails when clicking 'Download' on the scanner console
+
+Possible causes:
+* The number of rows in the .seq file exceeds NMAXBLOCKSFORGRADHEATCHECK which is hardcoded to 64000.
+ Design a shorter scan and see if it will run, or increase NMAXBLOCKSFORGRADHEATCHECK (requires recompiling the interpreter).
+* One ore more of the segments does not contain at least one gradient waveform, as required by the gradient heating check.
+* If the sequence contains pure delay blocks, the gradient heating check will generally be too conservative.
+ As a workaround for now, redesign a test version of your sequence without pure delay blocks and see if it will pass the gradient heating check.
+ Then in your actual scan, disable the gradient heating check by setting the CV disableGradientCheck to 1.
+
