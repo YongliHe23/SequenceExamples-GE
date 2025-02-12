@@ -3,6 +3,12 @@
 This repository contains examples of how to prepare and run Pulseq sequences
 on GE scanners using the 'Pulseq on GE v2' (pge2) interpreter.
 
+To execute a Pulseq (.seq) file using pge2, one option is to convert it to a .pge file
+using the PulCeq toolbox.  
+The latest version is: https://github.com/HarmonizedMRI/PulCeq/releases/tag/v2.2.1
+
+The latest version of pge2 is: https://github.com/jfnielsen/TOPPEpsdSourceCode/releases/tag/v2.3.0
+
 Compared to tv6, the main features of the pge2 interpreter are:
 * Loads a single binary file. We suggest using the file extension '.pge' but this is not a requirement. 
 This file can be created with 
