@@ -172,7 +172,7 @@ Possible causes:
 For debugging, it can be helpful to disable the gradient heating check by setting the CV **disableGradientCheck** to 1.
 
 
-### Gradient heating check fails on the scanner when clicking 'Download'
+### The scanner reports that the gradient heating exceeds the system limit 
 
 * If the sequence contains pure delay blocks, the gradient heating check will generally be too conservative and may issue a failure.
  As a workaround for now, redesign a test version of your sequence without pure delay blocks and see if it will pass the gradient heating check.
