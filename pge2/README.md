@@ -128,6 +128,17 @@ If this results in overlapping RF/ADC dead/ringdown times, you would then adjust
 by modifying the event delays and block durations when creating the .seq file.
 
 
+### Adding gradient rotation
+
+* Gradient rotations can be implemented with the `mr.rotate()` function in the Pulseq MATLAB toolbox, or by hand.
+* At present, each rotated waveform is stored as a separate shape in the .seq file, i.e., rotation information is not formally preserved in the .seq file.
+* During the seq2ceq.m step (part of the PulCeq toolbox), rotations are detected and written into the "Ceq" sequence structure.
+  This is necessary since the pge2 interpreter implements rotations more efficiently than explicit waveform shapes.
+* If a segment contains multiple blocks with different rotation matrices, **only the last** of the non-identity rotations are applied. 
+* The rotation is applied to the **entire segment** as a whole.
+  In other words, the interpreter cannot rotate each block within a segment independently.
+
+
 ### Sequence timing: Summary and further comments
 
 * When loading a segment, the interpreter inserts a 116us dead time at the end of each segment.
