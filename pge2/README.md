@@ -5,9 +5,6 @@ on GE scanners using the 'Pulseq on GE v2' (pge2) interpreter.
 
 To execute a Pulseq (.seq) file using pge2, one option is to convert it to a .pge file
 using the PulCeq toolbox.  
-The latest version is: https://github.com/HarmonizedMRI/PulCeq/releases/tag/v2.2.1
-
-The latest version of pge2 is: https://github.com/jfnielsen/TOPPEpsdSourceCode/releases/tag/v2.3.0
 
 Compared to tv6, the main features of the pge2 interpreter are:
 * Loads a single binary file. We suggest using the file extension '.pge' but this is not a requirement. 
@@ -22,21 +19,28 @@ or with seq2ceq.m and writeceq.m, available here: https://github.com/HarmonizedM
 
 
 
-## Quick start
-
-We recommend starting with the example in [2DGRE](2DGRE).
-
-For information about accessing and using the pge2 interpreter, see information below.
-
-
 ## A note on software releases
 
 It is important to use the appropriate versions (release) of the PulCeq toolbox and pge2 interpreter.
 In each example included here, the versions are specified. See [2DGRE/main.m](2DGRE/main.m) for an example.
 
-The various releases are available here:  
+The following is a list of compatible versions of the PulCeq MATLAB toolbox and the pge2 interpreter,
+starting with the latest (and recommended) version:
+
+| pge2 (tv7) | Compatible with:   | Comments |
+| ---------- | ------------------ | -------- |
+| [v2.3.0](https://github.com/jfnielsen/TOPPEpsdSourceCode/releases/tag/v2.3.0) | [PulCeq v2.2.2](https://github.com/HarmonizedMRI/PulCeq/releases/tag/v2.2.2) | Latest release. Bug fix for rotated gradients. |
+
+A complete list of the release history is available here:  
 https://github.com/HarmonizedMRI/PulCeq/releases/  
 https://github.com/jfnielsen/TOPPEpsdSourceCode/releases/ 
+
+
+## Quick start
+
+We recommend starting with the example in [2DGRE](2DGRE).
+
+For information about accessing and using the pge2 interpreter, see information below.
 
 
 ## Creating the .seq file
