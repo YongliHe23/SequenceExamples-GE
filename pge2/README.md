@@ -152,8 +152,9 @@ by modifying the event delays and block durations when creating the .seq file.
 
 ### Adding gradient rotation
 
-* Gradient rotations can be implemented with the `mr.rotate()` or `mr.rotate3D()` functions 
-  in the Pulseq toolbox. Note that `mr.rotate3D()` is in the 'dev' branch at the time of writing. 
+* Gradient rotations can be implemented 'by hand' by explicitly creating the gradient shapes and writing them into the .seq file,
+  or with the `mr.rotate()` or `mr.rotate3D()` functions  in the Pulseq toolbox. 
+  Note that `mr.rotate3D()` is in the 'dev' branch at the time of writing. 
   These functions return a cell array of events that can be passed directly to `seq.addBlock()`.
   When calling these functions, include all non-gradient events as well -- these will simply be passed on without change. 
   For example:
