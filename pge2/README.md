@@ -3,9 +3,6 @@
 This repository contains examples of how to prepare and run Pulseq sequences
 on GE scanners using the 'Pulseq on GE v2' (pge2) interpreter.
 
-To execute a Pulseq (.seq) file using pge2, one option is to convert it to a .pge file
-using the PulCeq toolbox.  
-
 Compared to tv6, the main features of the pge2 interpreter are:
 * Loads a single binary file. We suggest using the file extension '.pge' but this is not a requirement. 
 This file can be created with 
@@ -16,6 +13,26 @@ or with seq2ceq.m and writeceq.m, available here: https://github.com/HarmonizedM
   without first interpolating to 4us raster time as in the tv6 interpreter. 
   This saves hardware memory and enables things like very long constant (CW) RF pulses.
 * Updated gradient heating and SAR/RF checks, based on sliding-window calculation.
+
+
+## Workflow overview
+
+To execute a Pulseq (.seq) file using the pge2 GE interpreter:
+
+1. Create the .seq more or less as one usually does, but see the information below about adding TRID labels and other considerations.
+2. Convert the .seq file to a .pge file. In MATLAB, do:
+    ```
+    % Get PulCeq toolbox and convert to Ceq representation
+    system('git clone --branch v2.2.2 git@github.com:HarmonizedMRI/PulCeq.git');
+    addpath PulCeq/matlab
+    ceq = seq2ceq('gre2d.seq');
+    pislquant = 10;     % number of ADC events at beginning of scan for receive gain calibration
+    writeceq(ceq, 'gre2d.pge', 'pislquant', pislquant);   % write Ceq struct to file
+    ```
+3. Execute the .pge file with the pge2 interpreter.
+
+An alternative workflow is to prescribe the sequence interactively using [Pulserver](https://github.com/INFN-MRI/pulserver/) -- 
+this is work in progress to be presented at ISMRM 2025.
 
 
 
@@ -138,9 +155,9 @@ by modifying the event delays and block durations when creating the .seq file.
 * At present, each rotated waveform is stored as a separate shape in the .seq file, i.e., rotation information is not formally preserved in the .seq file.
 * During the seq2ceq.m step (part of the PulCeq toolbox), rotations are detected and written into the "Ceq" sequence structure.
   This is necessary since the pge2 interpreter implements rotations more efficiently than explicit waveform shapes.
-* If a segment contains multiple blocks with different rotation matrices, **only the last** of the non-identity rotations are applied. 
 * The rotation is applied to the **entire segment** as a whole.
   In other words, the interpreter cannot rotate each block within a segment independently.
+  If a segment contains multiple blocks with different rotation matrices, **only the last** of the non-identity rotations are applied. 
 
 
 ### Sequence timing: Summary and further comments
@@ -161,7 +178,7 @@ The Pulseq on GE v1 (tv6) user guide pdf discusses some of these points in more 
 In MATLAB:
 ```
 % Get PulCeq toolbox and convert to Ceq representation
-system('git clone --branch v2.1.2 git@github.com:HarmonizedMRI/PulCeq.git');
+system('git clone --branch v2.2.2 git@github.com:HarmonizedMRI/PulCeq.git');
 addpath PulCeq/matlab
 ceq = seq2ceq('gre2d.seq');
 pislquant = 10;               % number of ADC events at beginning of scan for receive gain calibration
