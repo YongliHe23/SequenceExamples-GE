@@ -29,6 +29,7 @@ To execute a Pulseq (.seq) file using the pge2 GE interpreter:
     pislquant = 10;     % number of ADC events at beginning of scan for receive gain calibration
     writeceq(ceq, 'gre2d.pge', 'pislquant', pislquant);   % write Ceq struct to file
     ```
+    **NB!** Make sure the versions of the PulCeq MATLAB toolbox and the pge2 interpreter are compatible -- see below.
 3. Execute the .pge file with the pge2 interpreter.
 
 An alternative workflow is to prescribe the sequence interactively using [Pulserver](https://github.com/INFN-MRI/pulserver/) -- 
@@ -48,7 +49,7 @@ starting with the latest (and recommended) version:
 | ---------- | ------------------ | -------- |
 | [v2.3.0](https://github.com/jfnielsen/TOPPEpsdSourceCode/releases/tag/v2.3.0) | [PulCeq v2.2.2](https://github.com/HarmonizedMRI/PulCeq/releases/tag/v2.2.2) | Latest release. Bug fix for rotated gradients. |
 
-A complete list of the release history is available here:  
+A complete list of the release histories are available here:  
 https://github.com/HarmonizedMRI/PulCeq/releases/  
 https://github.com/jfnielsen/TOPPEpsdSourceCode/releases/ 
 
