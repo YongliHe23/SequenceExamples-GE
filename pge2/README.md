@@ -82,6 +82,20 @@ At present, **each segment must contain at least one gradient event**.
 Otherwise, the gradient heating check done by the pge2 interpreter may fail.
 To disable the gradient heating check, set the CV `disableGradientCheck` to 1 on the console (user CVs screen).
 
+Each segment takes up waveform sequence memory in hardware, so it is generally good practice 
+to divide your sequence into as few segments as possible, each being as short as possible.
+
+Dynamic sequence changes that **do not** require a separate segment (TRID) to be assigned:
+* gradient/RF amplitude scaling
+* RF/receive phase change
+* change in duration of a pure delay block (block containing only a delay event)
+* gradient rotation
+
+Dynamic sequence changes that **do** require a separate segment (TRID) to be assigned:
+* change in waveform shape or duration
+* change in block execution order within a segment
+* change in the duration of any of the blocks within a segment, unless it is a pure delay block
+
 
 ### Set system hardware parameters
 
