@@ -152,13 +152,22 @@ by modifying the event delays and block durations when creating the .seq file.
 
 ### Adding gradient rotation
 
-* Gradient rotations can be implemented with the `mr.rotate()` function in the Pulseq MATLAB toolbox, or by hand.
+* Gradient rotations can be implemented with the `mr.rotate()` or `mr.rotate3D()` functions 
+  in the Pulseq toolbox. Note that `mr.rotate3D()` is in the 'dev' branch at the time of writing. 
+  These functions return a cell array of events that can be passed directly to `seq.addBlock()`.
+  When calling these functions, include all non-gradient events as well -- these will simply be passed on without change. 
+  For example:
+  ```
+  seq.addBlock(mr.rotate(gx, gy, adc, mr.makeDelay(0.1)));
+  ```
+  See also the following discussion: https://github.com/pulseq/pulseq/discussions/91
 * At present, each rotated waveform is stored as a separate shape in the .seq file, i.e., rotation information is not formally preserved in the .seq file.
 * During the seq2ceq.m step (part of the PulCeq toolbox), rotations are detected and written into the "Ceq" sequence structure.
   This is necessary since the pge2 interpreter implements rotations more efficiently than explicit waveform shapes.
 * The rotation is applied to the **entire segment** as a whole.
   In other words, the interpreter cannot rotate each block within a segment independently.
   If a segment contains multiple blocks with different rotation matrices, **only the last** of the non-identity rotations are applied. 
+  If you find this to be the case, redesign the segment definitions to achieve the desired rotations.
 
 
 ### Sequence timing: Summary and further comments
