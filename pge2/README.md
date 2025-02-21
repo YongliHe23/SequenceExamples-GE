@@ -1,5 +1,16 @@
 # Pulseq on GE v2 (pge2) examples 
 
+**Table of Contents**  
+[Overview and getting started](#overview-and-getting-started)  
+[Software releases](#software-releases)  
+[Creating the .seq file](#creating-the-pulseq-file)  
+[Executing the pge file on the scanner](#executing-the-pge-file-on-the-scanner)  
+[Troubleshooting tips](#troubleshooting-tips)
+
+
+
+## Overview and getting started
+
 This repository contains examples of how to prepare and run Pulseq sequences
 on GE scanners using the 'Pulseq on GE v2' (pge2) interpreter.
 
@@ -15,7 +26,7 @@ or with seq2ceq.m and writeceq.m, available here: https://github.com/HarmonizedM
 * Updated gradient heating and SAR/RF checks, based on sliding-window calculation.
 
 
-## Workflow overview
+### Workflow 
 
 To execute a Pulseq (.seq) file using the pge2 GE interpreter:
 
@@ -36,8 +47,14 @@ An alternative workflow is to prescribe the sequence interactively using [Pulser
 this is work in progress to be presented at ISMRM 2025.
 
 
+### Quick start
 
-## A note on software releases
+We recommend starting with the example in [2DGRE](2DGRE).
+
+For information about accessing and using the pge2 interpreter, see information below.
+
+
+## Software releases
 
 It is important to use the appropriate versions (release) of the PulCeq toolbox and pge2 interpreter.
 In each example included here, the versions are specified. See [2DGRE/main.m](2DGRE/main.m) for an example.
@@ -54,14 +71,8 @@ https://github.com/HarmonizedMRI/PulCeq/releases/
 https://github.com/jfnielsen/TOPPEpsdSourceCode/releases/ 
 
 
-## Quick start
 
-We recommend starting with the example in [2DGRE](2DGRE).
-
-For information about accessing and using the pge2 interpreter, see information below.
-
-
-## Creating the .seq file
+## Creating the Pulseq file
 
 The key points to keep in mind when creating a .seq file for the pge2 interpreter are summarized here.
 
@@ -82,7 +93,7 @@ At present, **each segment must contain at least one gradient event**.
 Otherwise, the gradient heating check done by the pge2 interpreter may fail.
 To disable the gradient heating check, set the CV `disableGradientCheck` to 1 on the console (user CVs screen).
 
-Each segment takes up waveform sequence memory in hardware, so it is generally good practice 
+Each segment takes up waveform memory in hardware, so it is generally good practice 
 to divide your sequence into as few segments as possible, each being as short as possible.
 
 Dynamic sequence changes that **do not** require a separate segment (TRID) to be assigned:
@@ -198,20 +209,7 @@ Depending on the sequence details, you may need to extend the segment duration t
 The Pulseq on GE v1 (tv6) user guide pdf discusses some of these points in more detail.
 
 
-## Converting the .seq file to a .pge file
-
-In MATLAB:
-```
-% Get PulCeq toolbox and convert to Ceq representation
-system('git clone --branch v2.2.2 git@github.com:HarmonizedMRI/PulCeq.git');
-addpath PulCeq/matlab
-ceq = seq2ceq('gre2d.seq');
-pislquant = 10;               % number of ADC events at beginning of scan for receive gain calibration
-writeceq(ceq, 'gre2d.pge', 'pislquant', pislquant);   % write Ceq struct to file
-```
-
-
-## Running the .pge file on the scanner
+## Executing the pge file on the scanner
 
 For scan instructions, see https://github.com/jfnielsen/TOPPEpsdSourceCode/tree/UserGuide/v7
 
