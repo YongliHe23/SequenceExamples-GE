@@ -19,7 +19,7 @@ sys = mr.opts('maxGrad', 50/sqrt(3), 'gradUnit','mT/m', ...
 seq = mr.Sequence(sys);             
 
 % Acquisition parameters 
-% The second echo has matrix size [Nx/2 Ny/2] and dwell time 20e-6
+% The second echo has matrix size [Nx/2 Ny] and dwell time 40e-6
 fov = 240e-3; 
 Nx = 192; Ny = 192;                 % 
 dwell = 20e-6;                      % ADC sample time (s)
@@ -57,13 +57,14 @@ seq2.addBlock(gx);
 seq2.addBlock(mr.scaleGrad(gx, -1));
 seq2.addBlock(gxSpoil, gyPre, gzSpoil);
 delayTR = ceil((TR - seq2.duration)/seq.gradRasterTime)*seq.gradRasterTime;
+assert(delayTR > 100e-6, 'Requested TR is too short');
 
 % Loop over phase encodes and define sequence blocks
 % iY <= -10        Dummy shots to reach steady state
 % -10 < iY <= 0    ADC is turned on and used for receive gain calibration on GE
 % iY > 0           Image acquisition
 
-nDummyShots = 10;  % shots to reach steady state
+nDummyShots = 20;  % shots to reach steady state
 pislquant = 10;     % number of shots/ADC events used for receive gain calibration
 
 rf_phase = 0;

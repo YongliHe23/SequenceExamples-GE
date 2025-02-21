@@ -7,8 +7,8 @@ https://github.com/jfnielsen/TOPPEpsdSourceCode/tree/UserGuide/v7/examples/2DGRE
 
 Tested on the following system:
 * GE MR750 
-* SW version MR30.1_R01
-* Pulseq interpreter pge2 (tv7) v2.2.0, available at https://github.com/jfnielsen/TOPPEpsdSourceCode/releases/tag/v2.2.0
+* SW version MR30.1\_R01
+* Pulseq interpreter pge2 (tv7) v2.3.0, available at https://github.com/jfnielsen/TOPPEpsdSourceCode/releases/tag/v2.3.0
  (private repository -- access granted to institutions with a GE research scanner).
 
 To download the required MATLAB packages,
