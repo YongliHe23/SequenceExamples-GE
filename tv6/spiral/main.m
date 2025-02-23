@@ -1,5 +1,4 @@
 createSequenceFile = true;
-reconstruct = false;
 
 if createSequenceFile
     % Get Pulseq toolbox and write spiral.seq
@@ -31,14 +30,3 @@ if createSequenceFile
     toppe.plotseq(sysGE, 'timeRange', [0 inf]);  % plot the whole sequence
 end
 
-if reconstruct
-    %Get MIRT toolbox
-    system('git clone --depth 1 git@github.com:JeffFessler/mirt.git');
-    cd mirt; setup; cd ..;
-
-    addpath ~/Programs/orchestra-sdk-2.1-1.matlab/
-
-    d = toppe.utils.loadsafile('mydata.h5', 'acq_order', true); %, 'version', 'tv6');
-
-    % TODO: do gridding recon
-end
