@@ -14,16 +14,29 @@
 This repository contains examples of how to prepare and run Pulseq sequences
 on GE scanners using the 'Pulseq on GE v2' (pge2) interpreter.
 
+The pge2 interpreter is quite powerful in the sense that it tries to directly translate
+the various events specified in the Pulseq file to the hardware,
+which allows great flexibility in sequence design and ability to translate sequences between vendors.
+This also mean that some care has to be taken when designing the Pulseq file, such as choosing
+gradient and RF raster times that are in fact supported by GE hardware.
+The information on this page is aimed at helping you design robust Pulseq sequences for GE scanners.
+
+It is recommended to first simulate the sequence in the GE simulator (WTools),
+which helps to identify most potential issues before going to the scanner.
+Instructions are available here: https://github.com/jfnielsen/TOPPEpsdSourceCode/tree/UserGuide/v7.
+
+### Differences from the tv6 interpreter
+
 Compared to tv6, the main features of the pge2 interpreter are:
 * Loads a single binary file. We suggest using the file extension '.pge' but this is not a requirement. 
 This file can be created with 
 [Pulserver](https://github.com/INFN-MRI/pulserver/),
-or with seq2ceq.m and writeceq.m, available here: https://github.com/HarmonizedMRI/PulCeq/.
-
+or with seq2ceq.m and writeceq.m as described below.
 * Places the trapezoid, extended trapezoid, and arbitrary waveform events directly onto the hardware,
   without first interpolating to 4us raster time as in the tv6 interpreter. 
   This saves hardware memory and enables things like very long constant (CW) RF pulses.
-* Updated gradient heating and SAR/RF checks, based on sliding-window calculation.
+* Updated gradient heating and SAR/RF checks, based on sliding-window calculations.
+
 
 
 ### Workflow 
