@@ -239,10 +239,14 @@ Possible causes:
 
 For debugging, it can be helpful to disable the gradient heating check by setting the CV **disableGradientCheck** to 1.
 
-
 ### The scanner reports that the gradient heating exceeds the system limit 
 
 * If the sequence contains pure delay blocks, the gradient heating check will generally be too conservative and may issue a failure.
  As a workaround for now, redesign a test version of your sequence without pure delay blocks and see if it will pass the gradient heating check.
  Then in your actual scan, disable the gradient heating check by setting disableGradientCheck to 1.
+
+ ### The scanner reports that the RF power/SAR exceeds system limit
+
+* The sliding-window RF/SAR check can fail if your sequence contains delays on the order of the sliding window width (default is 10s).
+  This will hopefully be fixed in the future, but for now you will need to redesign your sequence.
 
