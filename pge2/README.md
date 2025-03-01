@@ -99,17 +99,17 @@ Therefore, you must add `TRID` labels to mark the beginning of each TR or sequen
 You can see how this is done in the examples included in this repository.
 See also the Pulseq on GE v1 (tv6) manual.
 
-When creating a segment, **the interpreter inserts a 116us dead time (gap) at the end of each segment**.
-Please account for this when creating your .seq file.
+When assigning TRID labels, **follow these rules**:
+1. Add a TRID label to the first block in a segment. 
+   If a segment is repeated later in the sequence, you should generally re-use the same TRID;
+   see further comments below.
+2. Each segment must contain at least two blocks.
+3. Each segment must contain at least one gradient event. 
+   Otherwise, the gradient heating check done by the pge2 interpreter may fail.
+4. Gradient waveforms must ramp to zero at the beginning and end of a segment.
 
-At present, **each segment must contain at least one gradient event**.
-Otherwise, the gradient heating check done by the pge2 interpreter may fail.
-To disable the gradient heating check, set the CV `disableGradientCheck` to 1 on the console (user CVs screen).
-
-Each segment takes up waveform memory in hardware, so it is generally good practice 
-to divide your sequence into as few segments as possible, each being as short as possible.
-
-Dynamic sequence changes that **do not** require a separate segment (TRID) to be assigned:
+Dynamic sequence changes that **do not** require a separate segment (TRID) to be assigned
+when a segment is repeated:
 * gradient/RF amplitude scaling
 * RF/receive phase 
 * duration of a pure delay block (block containing only a delay event)
@@ -119,6 +119,12 @@ Dynamic sequence changes that **do** require a separate segment (TRID) to be ass
 * waveform shape or duration
 * block execution order within a segment
 * duration of any of the blocks within a segment, unless it is a pure delay block
+
+Other things to note:
+* When creating a segment, the interpreter inserts a 116us dead time (gap) at the end of each segment.
+Please account for this when creating your .seq file.
+* Each segment takes up waveform memory in hardware, so it is generally good practice 
+to divide your sequence into as few segments as possible, each being as short as possible.
 
 
 ### Set system hardware parameters
@@ -237,7 +243,7 @@ Possible causes:
 * One or more segments does not contain at least one gradient waveform, as required by the gradient heating check.
  Redesign your scan.
 
-For debugging, it can be helpful to disable the gradient heating check by setting the CV **disableGradientCheck** to 1.
+For debugging, it can be helpful to disable the gradient heating check by setting the CV **disableGradientCheck** to 1 (via the User CVs menu on the scanner console).
 
 ### The scanner reports that the gradient heating exceeds the system limit 
 
