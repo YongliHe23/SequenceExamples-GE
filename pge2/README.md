@@ -125,6 +125,9 @@ Other things to note:
 Please account for this when creating your .seq file.
 * Each segment takes up waveform memory in hardware, so it is generally good practice 
 to divide your sequence into as few segments as possible, each being as short as possible.
+* Each of the linear pieces of a trapezoid or extended trapezoid must consist of
+  at least two samples. In other words, the ramp/falldown time must be at least 8us.
+  
 
 
 ### Set system hardware parameters
