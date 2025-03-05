@@ -2,7 +2,7 @@
 
 Code for sequence generation and recon provided by Florian Wiesinger, GE
 
-Tested by jfnielsen@gmail.com on the following system(s):
+Tested on the following system(s):
 * GE MR750
 * SW version MR30.1\_R01
 * Pulseq interpreter pge2 version: https://github.com/jfnielsen/TOPPEpsdSourceCode/releases/tag/v2.3.0
