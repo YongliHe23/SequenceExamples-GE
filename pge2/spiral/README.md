@@ -1,17 +1,23 @@
-# Spiral sequence for Pulseq on GE v2 (pge2)
+# 2D interleaved spiral sequence for Pulseq on GE 
 
-Interleaved 2D spiral.  
+Code for sequence generation and recon provided by Florian Wiesinger, GE
 
-Tested on the following system(s):
+Tested by jfnielsen@gmail.com on the following system(s):
 * GE MR750
-* SW version MR30.1_R01
-* Pulseq interpreter pge2 (tv7) v2.2.0, available at https://github.com/jfnielsen/TOPPEpsdSourceCode/releases/tag/v2.2.0
+* SW version MR30.1\_R01
+* Pulseq interpreter pge2 version: https://github.com/jfnielsen/TOPPEpsdSourceCode/releases/tag/v2.3.0
 
 To download the required MATLAB packages,
 create the pge sequence file, and reconstruct the data, see `main.m` in this folder.
 
-For GE scan instructions, see https://github.com/jfnielsen/TOPPEpsdSourceCode/tree/UserGuide/v7
+Example reconstruction result with PinvRecon\_IntSpiral:  
+![Example image](1.png)
 
-## Issues, troubleshooting
+Important points to note when preparing a .seq file containing rotated gradients:
+* Use the same TRID independently of rotation angle.
+* The rotation is applied to the **entire segment** as a whole!
+  In other words, the interpreter cannot rotate each block 
+  within a segment independently.
 
-* Auto prescan fails when Nint >= 8 and mtx=128, reason is unknown.
+See also https://github.com/HarmonizedMRI/SequenceExamples-GE/tree/main/pge2/
+
