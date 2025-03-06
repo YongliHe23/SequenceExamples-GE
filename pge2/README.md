@@ -47,7 +47,7 @@ To execute a Pulseq (.seq) file using the pge2 GE interpreter:
 2. Convert the .seq file to a .pge file. In MATLAB, do:
     ```
     % Get PulCeq toolbox and convert to Ceq representation
-    system('git clone --branch v2.2.2 git@github.com:HarmonizedMRI/PulCeq.git');
+    system('git clone --branch v2.2.3-beta git@github.com:HarmonizedMRI/PulCeq.git');
     addpath PulCeq/matlab
     ceq = seq2ceq('gre2d.seq');
     pislquant = 10;     % number of ADC events at beginning of scan for receive gain calibration
