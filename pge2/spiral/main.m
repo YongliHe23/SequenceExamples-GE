@@ -11,8 +11,7 @@ if createSequenceFile
     writeIntSpiralFW;   
 
     % convert to spiral.pge
-    %system('git clone --branch v2.2.3 git@github.com:HarmonizedMRI/PulCeq.git');
-    system('git clone --branch tv7 git@github.com:fmrifrey/PulCeq.git');
+    system('git clone --branch v2.2.3-beta git@github.com:HarmonizedMRI/PulCeq.git');
     addpath PulCeq/matlab
     ceq = seq2ceq('spiral.seq');
     pislquant = 1;   % number of ADC events used for receive gain calibration
