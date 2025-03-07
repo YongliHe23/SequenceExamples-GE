@@ -77,7 +77,8 @@ starting with the latest (and recommended) version:
 
 | pge2 (tv7) | Compatible with:   | Comments |
 | ---------- | ------------------ | -------- |
-| [v2.5.0-alpha](https://github.com/jfnielsen/TOPPEpsdSourceCode/releases/tag/v2.5.0-alpha) | [PulCeq v2.4.0-alpha](https://github.com/HarmonizedMRI/PulCeq/releases/tag/v2.4.0-alpha) | Supports arbitrary 3D rotations. More robust gradient heating check. |
+| [v2.5.0-alpha](https://github.com/jfnielsen/TOPPEpsdSourceCode/releases/tag/v2.5.0-alpha) | [PulCeq v2.4.0-alpha](https://github.com/HarmonizedMRI/PulCeq/releases/tag/v2.4.0-alpha) | Allow segments containing no gradients to pass gradient heating check. |
+| [v2.4.0-alpha](https://github.com/jfnielsen/TOPPEpsdSourceCode/releases/tag/v2.4.0-alpha) | [PulCeq v2.3.0-alpha](https://github.com/HarmonizedMRI/PulCeq/releases/tag/v2.3.0-alpha) | Supports arbitrary 3D rotations. Removes limit on total number of Pulseq blocks. |
 
 A complete list of the release histories are available here:  
 https://github.com/HarmonizedMRI/PulCeq/releases/  
