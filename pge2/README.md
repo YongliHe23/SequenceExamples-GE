@@ -47,7 +47,7 @@ To execute a Pulseq (.seq) file using the pge2 GE interpreter:
 2. Convert the .seq file to a .pge file. In MATLAB, do:
     ```
     % Get PulCeq toolbox and convert to Ceq representation
-    system('git clone --branch v2.2.3-beta git@github.com:HarmonizedMRI/PulCeq.git');
+    system('git clone --branch v2.4.0-beta git@github.com:HarmonizedMRI/PulCeq.git');
     addpath PulCeq/matlab
     ceq = seq2ceq('gre2d.seq');
     pislquant = 10;     % number of ADC events at beginning of scan for receive gain calibration
@@ -77,7 +77,7 @@ starting with the latest (and recommended) version:
 
 | pge2 (tv7) | Compatible with:   | Comments |
 | ---------- | ------------------ | -------- |
-| [v2.4.0-alpha](https://github.com/jfnielsen/TOPPEpsdSourceCode/releases/tag/v2.4.0-alpha) | [PulCeq v2.3.0-alpha](https://github.com/HarmonizedMRI/PulCeq/releases/tag/v2.3.0-alpha) | Supports arbitrary 3D rotations. More robust gradient heating check. |
+| [v2.5.0-alpha](https://github.com/jfnielsen/TOPPEpsdSourceCode/releases/tag/v2.5.0-alpha) | [PulCeq v2.4.0-alpha](https://github.com/HarmonizedMRI/PulCeq/releases/tag/v2.4.0-alpha) | Supports arbitrary 3D rotations. More robust gradient heating check. |
 
 A complete list of the release histories are available here:  
 https://github.com/HarmonizedMRI/PulCeq/releases/  
