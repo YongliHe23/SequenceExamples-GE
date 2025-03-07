@@ -72,13 +72,21 @@ For information about accessing and using the pge2 interpreter, see information 
 It is important to use the appropriate versions (release) of the PulCeq toolbox and pge2 interpreter.
 In each example included here, the versions are specified. See [2DGRE/main.m](2DGRE/main.m) for an example.
 
+For pge2 the version (release) numbering scheme is
+```
+v2.major.minor.patch
+```
+where `major` indicates incompabitibility with previous versions, typically due to changes in 
+the .pge file format.
+
 The following is a list of compatible versions of the PulCeq MATLAB toolbox and the pge2 interpreter,
 starting with the latest (and recommended) version:
 
 | pge2 (tv7) | Compatible with:   | Comments |
 | ---------- | ------------------ | -------- |
-| [v2.5.0-alpha](https://github.com/jfnielsen/TOPPEpsdSourceCode/releases/tag/v2.5.0-alpha) | [PulCeq v2.4.0-alpha](https://github.com/HarmonizedMRI/PulCeq/releases/tag/v2.4.0-alpha) | Allows segments containing no gradients to pass gradient heating check. |
-| [v2.4.0-alpha](https://github.com/jfnielsen/TOPPEpsdSourceCode/releases/tag/v2.4.0-alpha) | [PulCeq v2.3.0-alpha](https://github.com/HarmonizedMRI/PulCeq/releases/tag/v2.3.0-alpha) | Removes limit on total number of Pulseq blocks. |
+| [v2.5.0-alpha](https://github.com/jfnielsen/TOPPEpsdSourceCode/releases/tag/v2.5.0-alpha) | [PulCeq v2.4.0-alpha](https://github.com/HarmonizedMRI/PulCeq/releases/tag/v2.4.0-alpha) | Allow segments without gradients to pass heating check. |
+| [v2.4.0-alpha](https://github.com/jfnielsen/TOPPEpsdSourceCode/releases/tag/v2.4.0-alpha) | [PulCeq v2.3.0-alpha](https://github.com/HarmonizedMRI/PulCeq/releases/tag/v2.3.0-alpha) | Remove limit on total number of Pulseq blocks. |
+| [v2.3.0](https://github.com/jfnielsen/TOPPEpsdSourceCode/releases/tag/v2.3.0) | [PulCeq v2.2.3-beta](https://github.com/HarmonizedMRI/PulCeq/releases/tag/v2.2.3-beta) | Supports 3D rotations |
 
 A complete list of the release histories are available here:  
 https://github.com/HarmonizedMRI/PulCeq/releases/  
