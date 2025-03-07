@@ -241,8 +241,6 @@ For scan instructions, see https://github.com/jfnielsen/TOPPEpsdSourceCode/tree/
 ### The sequence fails when clicking 'Download' on the scanner console
 
 Possible causes:
-* The number of rows in the .seq file exceeds NMAXBLOCKSFORGRADHEATCHECK which is hardcoded to 64000.
- Design a shorter scan and see if it will run, or increase NMAXBLOCKSFORGRADHEATCHECK (requires recompiling the interpreter).
 * One or more segments does not contain at least one gradient waveform, as required by the gradient heating check.
  Redesign your scan.
 
