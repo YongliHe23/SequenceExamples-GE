@@ -103,10 +103,9 @@ When assigning TRID labels, **follow these rules**:
 1. Add a TRID label to the first block in a segment. 
    If a segment is repeated later in the sequence, you should generally re-use the same TRID;
    see further comments below.
-2. Each segment must contain at least two blocks.
-3. Each segment must contain at least one gradient event. 
-   Otherwise, the gradient heating check done by the pge2 interpreter may fail.
-4. Gradient waveforms must ramp to zero at the beginning and end of a segment.
+2. Each segment must contain at least one rf or gradient event.
+   Otherwise, the safety checks done by the pge2 interpreter may fail.
+3. Gradient waveforms must ramp to zero at the beginning and end of a segment.
 
 Dynamic sequence changes that **do not** require a separate segment (TRID) to be assigned
 when a segment is repeated:
