@@ -5,6 +5,7 @@
 [Software releases](#software-releases)  
 [Creating the .seq file](#creating-the-pulseq-file)  
 [Executing the pge file on the scanner](#executing-the-pge-file-on-the-scanner)  
+[Safety management](#safety-management)  
 [Troubleshooting tips](#troubleshooting-tips)
 
 
@@ -242,21 +243,30 @@ The Pulseq on GE v1 (tv6) user guide pdf discusses some of these points in more 
 For scan instructions, see https://github.com/jfnielsen/TOPPEpsdSourceCode/tree/UserGuide/v7
 
 
+## Safety management
+
+### PNS
+
+PNS should be estimated in MATLAB using various tools, e.g., the [toppe.pns()](https://github.com/toppeMRI/toppe/blob/main/%2Btoppe/pns.m) function for GE, 
+or the [SAFE model](https://github.com/filip-szczepankiewicz/safe_pns_prediction) for Siemens.
+
+### Gradient and RF subsystem protection, and patient SAR
+
+This is handled for you by the interpreter, using a sliding-average estimation that parses through
+**the first 64,000 blocks** in the sequence (or until the end of the scan is reached, whichever comes first).
+It is your responsibility to ensure that the gradient/RF power in the remainder of the sequence
+(if any) does not exceed that in the first 64,000 blocks.
+This limit (64,000) is due to apparent memory limitations and has been determined empirically.
+
+
 ## Troubleshooting tips
 
 ### The sequence fails when clicking 'Download' on the scanner console
 
 Possible causes:
-* One or more segments does not contain at least one gradient waveform, as required by the gradient heating check.
- Redesign your scan.
+* One or more segments does not contain at least one rf or gradient event, as required by the sliding-window rf/gradient heating check.
 
 For debugging, it can be helpful to disable the gradient heating check by setting the CV **disableGradientCheck** to 1 (via the User CVs menu on the scanner console).
-
-### The scanner reports that the gradient heating exceeds the system limit 
-
-* If the sequence contains pure delay blocks, the gradient heating check will generally be too conservative and may issue a failure.
- As a workaround for now, redesign a test version of your sequence without pure delay blocks and see if it will pass the gradient heating check.
- Then in your actual scan, disable the gradient heating check by setting disableGradientCheck to 1.
 
  ### The scanner reports that the RF power/SAR exceeds system limit
 
