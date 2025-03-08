@@ -247,15 +247,16 @@ For scan instructions, see https://github.com/jfnielsen/TOPPEpsdSourceCode/tree/
 
 ### PNS
 
-PNS should be estimated in MATLAB using various tools, e.g., the [toppe.pns()](https://github.com/toppeMRI/toppe/blob/main/%2Btoppe/pns.m) function for GE, 
+PNS can be estimated in MATLAB using various tools, e.g., the [toppe.pns()](https://github.com/toppeMRI/toppe/blob/main/%2Btoppe/pns.m) function for GE, 
 or the [SAFE model](https://github.com/filip-szczepankiewicz/safe_pns_prediction) for Siemens.
+ [TODO: include an example of this]
 
 ### Gradient and RF subsystem protection, and patient SAR
 
 This is handled for you by the interpreter, using a sliding-average estimation that parses through
 **the first 64,000 blocks** in the sequence (or until the end of the scan is reached, whichever comes first).
 It is your responsibility to ensure that the gradient/RF power in the remainder of the sequence
-(if any) does not exceed that in the first 64,000 blocks.
+does not exceed that in the first 64,000 blocks.
 This limit (64,000) is due to apparent memory limitations and has been determined empirically.
 
 
