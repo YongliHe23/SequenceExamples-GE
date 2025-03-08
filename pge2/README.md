@@ -12,8 +12,9 @@
 
 ## Overview and getting started
 
-This repository contains examples of how to prepare and run Pulseq sequences
-on GE scanners using the 'Pulseq on GE v2' (pge2) interpreter.
+This repository contains examples of how to prepare and run 
+[Pulseq](https://pulseq.github.io/)
+sequences on GE scanners using the 'Pulseq on GE v2' (pge2) interpreter.
 
 The pge2 interpreter is quite powerful in the sense that it tries to directly translate
 the various events specified in the Pulseq file to the hardware,
