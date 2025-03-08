@@ -74,7 +74,7 @@ In each example included here, the versions are specified. See [2DGRE/main.m](2D
 
 For pge2 the version (release) numbering scheme is
 ```
-v2.major.minor.patch
+v2.major.minor
 ```
 where `major` indicates incompabitibility with previous versions, typically due to changes in 
 the .pge file format.
