@@ -80,7 +80,7 @@ v2.major.minor
 where `major` indicates incompabitibility with previous versions, typically due to changes in 
 the .pge file format.
 
-The following is a list of compatible versions of the PulCeq MATLAB toolbox and the pge2 interpreter,
+The following is a list of mutually compatible versions of the pge2 interpreter and the PulCeq MATLAB toolbox,
 starting with the latest (and recommended) version:
 
 | pge2 (tv7) | Compatible with:   | Comments |
