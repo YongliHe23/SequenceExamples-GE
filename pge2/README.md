@@ -17,10 +17,10 @@ on GE scanners using the 'Pulseq on GE v2' (pge2) interpreter.
 
 The pge2 interpreter is quite powerful in the sense that it tries to directly translate
 the various events specified in the Pulseq file to the hardware,
-which allows great flexibility in sequence design and ability to translate sequences between vendors.
+which allows great flexibility in sequence design.
 This also means that care has to be taken when designing the Pulseq file, such as choosing
 gradient and RF raster times that are in fact supported by GE hardware.
-The information on this page is aimed at helping you design robust Pulseq sequences for GE scanners.
+The information on this page is designed to guide you in creating robust Pulseq sequences for GE scanners.
 
 It is recommended to first simulate the sequence in the GE simulator (WTools),
 which helps to identify most potential issues before going to the scanner.
