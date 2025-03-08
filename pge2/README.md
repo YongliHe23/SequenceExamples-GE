@@ -47,7 +47,7 @@ To execute a Pulseq (.seq) file using the pge2 GE interpreter:
 2. Convert the .seq file to a .pge file. In MATLAB, do:
     ```
     % Get PulCeq toolbox and convert to Ceq representation
-    system('git clone --branch v2.4.0-beta git@github.com:HarmonizedMRI/PulCeq.git');
+    system('git clone --branch v2.4.0-alpha git@github.com:HarmonizedMRI/PulCeq.git');
     addpath PulCeq/matlab
     ceq = seq2ceq('gre2d.seq');
     pislquant = 10;     % number of ADC events at beginning of scan for receive gain calibration
@@ -137,7 +137,6 @@ to divide your sequence into as few segments as possible, each being as short as
   at least two samples. In other words, the ramp/falldown time must be at least 8us.
   
 
-
 ### Set system hardware parameters
 
 **Raster times:**  
@@ -168,7 +167,6 @@ While the Pulseq MATLAB toolbox encourages the insertion of RF/ADC dead/ringdown
 and end of each block, this is generally not necessary on GE,
 and it is perfectly ok to override that behavior to make the sequence more time-efficient.
 See the `sys` struct example next.
-
 
 **Examples:**
 ```
