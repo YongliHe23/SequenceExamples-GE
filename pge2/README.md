@@ -16,7 +16,7 @@ This repository contains examples of how to prepare and run
 [Pulseq](https://pulseq.github.io/)
 sequences on GE scanners using the 'Pulseq on GE v2' (pge2) interpreter.
 
-The pge2 interpreter is quite powerful in the sense that it tries to directly translate
+The pge2 interpreter is quite powerful in the sense that it directly translates
 the various events specified in the Pulseq file to the hardware,
 which allows great flexibility in sequence design.
 This also means that care has to be taken when designing the Pulseq file, such as choosing
@@ -26,19 +26,6 @@ The information on this page is designed to guide you in creating robust Pulseq 
 It is recommended to first simulate the sequence in the GE simulator (WTools),
 which helps to identify most potential issues before going to the scanner.
 Instructions are available here: https://github.com/jfnielsen/TOPPEpsdSourceCode/tree/UserGuide/v7.
-
-### Differences from the tv6 interpreter
-
-Compared to tv6, the main features of the pge2 interpreter are:
-* Loads a single binary file. We suggest using the file extension '.pge' but this is not a requirement. 
-This file can be created with 
-[Pulserver](https://github.com/INFN-MRI/pulserver/),
-or with seq2ceq.m and writeceq.m as described below.
-* Places the trapezoid, extended trapezoid, and arbitrary waveform events directly onto the hardware,
-  without first interpolating to 4us raster time as in the tv6 interpreter. 
-  This saves hardware memory and enables things like very long constant (CW) RF pulses.
-* Updated gradient heating and SAR/RF checks, based on sliding-window calculations.
-
 
 
 ### Workflow 
@@ -67,6 +54,20 @@ this is work in progress to be presented at ISMRM 2025.
 We recommend starting with the example in [2DGRE](2DGRE).
 
 For information about accessing and using the pge2 interpreter, see information below.
+
+
+### Differences from the tv6 interpreter
+
+Compared to tv6, the main features of the pge2 interpreter are:
+* Loads a single binary file. We suggest using the file extension '.pge' but this is not a requirement. 
+This file can be created with 
+[Pulserver](https://github.com/INFN-MRI/pulserver/),
+or with seq2ceq.m and writeceq.m as described below.
+* Places the trapezoid, extended trapezoid, and arbitrary waveform events directly onto the hardware,
+  without first interpolating to 4us raster time as in the tv6 interpreter. 
+  This saves hardware memory and enables things like very long constant (CW) RF pulses.
+* Updated gradient heating and SAR/RF checks, based on sliding-window calculations.
+
 
 
 ## Software releases
