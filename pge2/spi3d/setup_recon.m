@@ -87,8 +87,11 @@ function [A,W,b] = setup_recon(varargin)
     W = Gdiag(wi / sum(abs(wi)));
 
     % repeat for each scale
-    A = kronI(seq_args.nscl,A);
-    W = kronI(seq_args.nscl,W);
+    if seq_args.nscl > 1
+        % repeat for each scale
+        A = kronI(seq_args.nscl,A);
+        W = kronI(seq_args.nscl,W);
+    end
 
     % mask out data
     d_r = reshape(d,[],seq_args.nscl);

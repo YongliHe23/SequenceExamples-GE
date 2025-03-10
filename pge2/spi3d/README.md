@@ -9,10 +9,12 @@ which is needed since rotation matrices are not stored in the Pulseq (.seq) file
 For more information about including rotated gradients in your .seq file, 
 see https://github.com/HarmonizedMRI/SequenceExamples-GE/tree/main/pge2.
 
-Tested by on the following system(s):
-* GE MR750
-* SW version MR30.1\_R01
-* Pulseq interpreter pge2 version: https://github.com/jfnielsen/TOPPEpsdSourceCode/releases/tag/v2.3.0
+Tested on the following system(s):  
+
+| Scanner | Scanner SW version | pge2 version | PulCeq version |  
+| --- | --- | --- | --- |  
+| GE MR750 | MR30.1\_R01 | [v2.5.0-beta](https://github.com/jfnielsen/TOPPEpsdSourceCode/releases/tag/v2.5.0-beta) | [v2.4.0-alpha](https://github.com/HarmonizedMRI/PulCeq/releases/tag/v2.4.0-alpha) |  
+| GE MR750 | MR30.1\_R01 | [v2.3.0](https://github.com/jfnielsen/TOPPEpsdSourceCode/releases/tag/v2.3.0) | git clone --branch tv7 git@github.com:fmrifrey/PulCeq.git |
 
 To download the required MATLAB packages,
 create the pge sequence file, and reconstruct the data, see `main.m` in this folder.
