@@ -28,6 +28,7 @@ addpath toppe
 % MIRT
 system('git clone git@github.com:JeffFessler/MIRT.git');
 run MIRT/setup.m
+run run MIRT/ir_mex_build.m
 
 %% Actions
 createSequenceFile = 1;
