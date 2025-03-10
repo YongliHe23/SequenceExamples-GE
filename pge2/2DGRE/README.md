@@ -5,11 +5,11 @@ Dual-echo 2D SPGR acquisition, with two different ADC events with different band
 For a traditional 2D SPGR sequence with only one ADC event, see
 https://github.com/jfnielsen/TOPPEpsdSourceCode/tree/UserGuide/v7/examples/2DGRE
 
-Tested on the following system:
-* GE MR750 
-* SW version MR30.1\_R01
-* Pulseq interpreter pge2 (tv7) v2.3.0, available at https://github.com/jfnielsen/TOPPEpsdSourceCode/releases/tag/v2.3.0
- (private repository -- access granted to institutions with a GE research scanner).
+Tested on the following system(s):  
+| Scanner | Scanner SW version | pge2 version | PulCeq version |  
+| --- | --- | --- | --- |
+| GE MR750 | MR30.1\_R01 | [v2.5.0-beta](https://github.com/jfnielsen/TOPPEpsdSourceCode/releases/tag/v2.5.0-beta) | [v2.4.0-alpha](https://github.com/HarmonizedMRI/PulCeq/releases/tag/v2.4.0-alpha) |  
+| GE MR750 | MR30.1\_R01 | [v2.3.0](https://github.com/jfnielsen/TOPPEpsdSourceCode/releases/tag/v2.3.0) | [v2.2.2](https://github.com/HarmonizedMRI/PulCeq/releases/tag/v2.2.2) |
 
 To download the required MATLAB packages,
 create the pge sequence file, and reconstruct the data, see `main.m` in this folder.

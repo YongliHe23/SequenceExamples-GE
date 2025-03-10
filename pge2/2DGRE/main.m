@@ -1,15 +1,15 @@
 % actions
-createSequenceFile = true;
-reconstruct = false;
+createSequenceFile = false;
+reconstruct = true;
 
 if createSequenceFile
     % create .seq file
-    system('git clone git@github.com:pulseq/pulseq.git');
+    system('git clone --branch v1.5.0 git@github.com:pulseq/pulseq.git');
     addpath pulseq/matlab
     write2DGRE;   % writes .seq file, and sets pislquant
 
     % Convert .seq file to a PulCeq (Ceq) object
-    system('git clone --branch v2.2.2 git@github.com:HarmonizedMRI/PulCeq.git');
+    system('git clone --branch v2.4.0-alpha git@github.com:HarmonizedMRI/PulCeq.git');
     addpath PulCeq/matlab
     ceq = seq2ceq('gre2d.seq');
     writeceq(ceq, 'gre2d.pge', 'pislquant', pislquant);
@@ -24,7 +24,7 @@ if reconstruct
 
     addpath ~/Programs/orchestra-sdk-2.1-1.matlab/
 
-    archive = GERecon('Archive.Load', 'test.h5');
+    archive = GERecon('Archive.Load', 'data.h5');
 
     % skip past receive gain calibration TRs (pislquant)
     for n = 1:pislquant
