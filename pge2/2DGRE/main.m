@@ -1,6 +1,6 @@
 % actions
-createSequenceFile = false;
-reconstruct = true;
+createSequenceFile = true;
+reconstruct = false;
 
 if createSequenceFile
     % create .seq file
