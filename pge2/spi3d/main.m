@@ -21,6 +21,7 @@ system('git clone --branch v1.5.0 git@github.com:pulseq/pulseq.git');
 addpath pulseq/matlab
 % PulCeq
 system('git clone --branch tv7 git@github.com:fmrifrey/PulCeq.git');
+%system('git clone --branch v2.4.0-alpha git@github.com:fmrifrey/PulCeq.git');
 addpath PulCeq/matlab
 % TOPPE
 system('git clone --branch develop git@github.com:toppeMRI/toppe.git');
