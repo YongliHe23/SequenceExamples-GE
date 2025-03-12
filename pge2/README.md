@@ -270,7 +270,6 @@ This limit (64,000) is due to apparent memory limitations and has been determine
 Possible causes:
 * One or more segments does not contain at least one rf or gradient event, as required by the sliding-window rf/gradient heating check.
 
-For debugging, it can be helpful to disable the gradient heating check by setting the CV **disableGradientCheck** to 1 (via the User CVs menu on the scanner console).
 
  ### The scanner reports that the RF power/SAR exceeds system limit
 
