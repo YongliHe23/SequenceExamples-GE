@@ -87,6 +87,7 @@ starting with the latest (and recommended) version:
 
 | pge2 (tv7) | Compatible with:   | Comments |
 | ---------- | ------------------ | -------- |
+| [v2.5.0-beta3](https://github.com/jfnielsen/TOPPEpsdSourceCode/releases/tag/v2.5.0-beta3) | [PulCeq v2.4.0-alpha](https://github.com/HarmonizedMRI/PulCeq/releases/tag/v2.4.0-alpha) | Added MP26 support. |
 | [v2.5.0-beta2](https://github.com/jfnielsen/TOPPEpsdSourceCode/releases/tag/v2.5.0-beta2) | [PulCeq v2.4.0-alpha](https://github.com/HarmonizedMRI/PulCeq/releases/tag/v2.4.0-alpha) | DV26 support. Bug fixes. |
 | [v2.5.0-beta](https://github.com/jfnielsen/TOPPEpsdSourceCode/releases/tag/v2.5.0-beta) | [PulCeq v2.4.0-alpha](https://github.com/HarmonizedMRI/PulCeq/releases/tag/v2.4.0-alpha) | Allow segments without gradients to pass heating check. |
 | [v2.4.0-alpha](https://github.com/jfnielsen/TOPPEpsdSourceCode/releases/tag/v2.4.0-alpha) | [PulCeq v2.3.0-alpha](https://github.com/HarmonizedMRI/PulCeq/releases/tag/v2.3.0-alpha) | Remove limit on total number of Pulseq blocks. |
