@@ -4,7 +4,7 @@
 
 Jon-Fredrik Nielsen, Ph.D.  
 University of Michigan  
-Ann Arbor, MI, USA
+Ann Arbor, MI, USA  
 
 Session 8: Clinical Translation & Industry  
 Monday Mar 17, 2025, 11:30am  
@@ -20,5 +20,6 @@ vendor-agnostic pulse sequences, by filling out this
 If you want to check out what other Pulseq users are up to, 
 or want to share your own project with the community, see https://harmonizedmri.github.io/.
 
-
+We encourage you to **write Pulseq protocols into your next grant application!** 
+Let us know and we'll provide you with template text for the Approach and Budget Justification sections.
 
