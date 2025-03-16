@@ -21,5 +21,5 @@ If you want to check out what other Pulseq users are up to,
 or want to share your own project with the community, see https://harmonizedmri.github.io/.
 
 We encourage you to **write Pulseq protocols into your next grant application!** 
-Let us know and we'll provide you with template text for the Approach and Budget Justification sections.
-
+Let us know and we'll provide you with template text for the Approach and Budget Justification sections,
+as well as other guidance.
