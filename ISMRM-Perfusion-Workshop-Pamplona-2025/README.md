@@ -1,4 +1,4 @@
-# Pulseq ASL sequence demo for the Pamplona perfusion workshop Mar 15-17, 2025
+# Pulseq ASL demo sequence for the Pamplona perfusion workshop Mar 15-17, 2025
 
 **Vendor-Neutral MRI Pulse Programming with Pulseq: Current Status & Application to Velocity-Selective ASL**
 
