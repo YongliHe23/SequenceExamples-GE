@@ -1,6 +1,6 @@
-# Pulseq ASL demo sequence for the Pamplona perfusion workshop Mar 15-17, 2025
+# Pulseq ASL demo sequence for the ISMRM Workshop on Perfusion MRI: Found in Translation. Pamplona Mar 15-17, 2025 
 
-**Vendor-neutral MRI pulse programming with Pulseq: Current status & application to velocity-selective ASL**
+Talk title: **Vendor-neutral MRI pulse programming with Pulseq: Current status & application to velocity-selective ASL**
 
 Jon-Fredrik Nielsen, Ph.D.  
 University of Michigan  
@@ -8,6 +8,7 @@ Ann Arbor, MI, USA
 
 Session 8: Clinical Translation & Industry  
 Monday Mar 17, 2025, 11:30am  
+https://www.ismrm.org/workshops/2025/Perfusion/
 
 This folder contains the MATLAB source code for generating the
 velocity-selective ASL sequence described in the above talk.
