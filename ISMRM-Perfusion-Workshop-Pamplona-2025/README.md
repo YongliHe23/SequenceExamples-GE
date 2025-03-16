@@ -1,6 +1,6 @@
 # Pulseq ASL demo sequence for the Pamplona perfusion workshop Mar 15-17, 2025
 
-**Vendor-Neutral MRI Pulse Programming with Pulseq: Current Status & Application to Velocity-Selective ASL**
+**Vendor-neutral MRI pulse programming with Pulseq: Current status & application to velocity-selective ASL**
 
 Jon-Fredrik Nielsen, Ph.D.  
 University of Michigan  
@@ -12,6 +12,9 @@ Monday Mar 17, 2025, 11:30am
 This folder contains the MATLAB source code for generating the
 velocity-selective ASL sequence described in the above talk.
 See [ASL/README.md](ASL/README.md) for details.
+
+The slides presented at the talk are available 
+[here](https://docs.google.com/presentation/d/17v-6y4BlRbl8NEHDp0yiKISXIEkUCnmHhscHJTSFdHw/edit?usp=sharing).
 
 **We want your feedback!** Please help us understand your needs and wishes related to Pulseq and
 vendor-agnostic pulse sequences, by filling out this
