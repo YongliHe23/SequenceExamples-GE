@@ -149,10 +149,15 @@ Unlike tv6, the waveforms in the .seq file are NOT interpolated to 4us, but are 
 placed directly onto the hardware. 
 This is far more memory efficient and generally more accurate.
 Therefore, the following raster time requirements must be met in the .seq file:
-* gradient raster time must be multiple of 4us
-* rf raster time must be multiple of 2us
-* adc raster time must be multiple of 2us
-* In addition, it seems best to set block duration raster to 4us
+* gradient raster time must be on a 4us boundary
+* RF raster time must be on a 2us boundary
+* ADC raster time must be an integer multiple of 2us
+* block duration must be a on a 4us boundary
+
+**Event delays:**  
+* gradient event delays must be an integer multiple of 4us
+* RF event delays must be an integer multiple of 2us
+* ADC event delays must be an integer multiple of 1us
 
 **Minimum gaps before and after RF/ADC events:**   
 Like on other vendors, there is some time required to turn on/off the RF amplifier and ADC card.
