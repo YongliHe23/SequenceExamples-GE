@@ -33,17 +33,38 @@ Instructions are available here: https://github.com/jfnielsen/TOPPEpsdSourceCode
 To execute a Pulseq (.seq) file using the pge2 GE interpreter:
 
 1. Create the .seq more or less as one usually does, but see the information below about adding TRID labels and other considerations.
-2. Convert the .seq file to a .pge file. In MATLAB, do:
-    ```
-    % Get PulCeq toolbox and convert to Ceq representation
-    system('git clone --branch v2.4.0-alpha git@github.com:HarmonizedMRI/PulCeq.git');
+
+2. Convert the .seq file to a Ceq sequence object. In MATLAB, do:
+    ```matlab
+    system('git clone --branch v2.4.1 git@github.com:HarmonizedMRI/PulCeq.git');
     addpath PulCeq/matlab
     ceq = seq2ceq('gre2d.seq');
-    pislquant = 10;     % number of ADC events at beginning of scan for receive gain calibration
+    ```
+    NB! Make sure the versions of the PulCeq MATLAB toolbox and the pge2 interpreter are compatible -- see below.
+
+3. Check sequence timing with `pge2.validate()` (optional)
+    ```matlab
+    % Define hardware parameters
+    psd_rf_wait = 150e-6;  % RF-gradient delay, scanner specific (s)
+    psd_grd_wait = 120e-6; % ADC-gradient delay, scanner specific (s)
+    b1_max = 0.25;         % Gauss
+    g_max = 5;             % Gauss/cm
+    slew_max = 20;         % Gauss/cm/ms
+    gamma = 4.2576e3;      % Hz/Gauss
+    sys = pge2.getsys(psd_rf_wait, psd_grd_wait, b1_max, g_max, slew_max, gamma);
+
+    % Check if 'ceq' is compatible with the parameters in 'sys'
+    pge2.validate(ceq, sys);
+    ```
+    See https://github.com/HarmonizedMRI/PulCeq/tree/tv7/matlab/%2Bpge2 for details.
+
+4. If step 3 runs without errors, write the Ceq object to file:
+    ```matlab
+    pislquant = 10;  % number of ADC events at start of scan for receive gain calibration
     writeceq(ceq, 'gre2d.pge', 'pislquant', pislquant);   % write Ceq struct to file
     ```
-    **NB!** Make sure the versions of the PulCeq MATLAB toolbox and the pge2 interpreter are compatible -- see below.
-3. Execute the .pge file with the pge2 interpreter.
+
+5. Execute the .pge file with the pge2 interpreter.
 
 An alternative workflow is to prescribe the sequence interactively using [Pulserver](https://github.com/INFN-MRI/pulserver/) -- 
 this is work in progress to be presented at ISMRM 2025.
@@ -87,7 +108,7 @@ starting with the latest (and recommended) version:
 
 | pge2 (tv7) | Compatible with:   | Comments |
 | ---------- | ------------------ | -------- |
-| [v2.5.0-beta3](https://github.com/jfnielsen/TOPPEpsdSourceCode/releases/tag/v2.5.0-beta3) | [PulCeq v2.4.0-alpha](https://github.com/HarmonizedMRI/PulCeq/releases/tag/v2.4.0-alpha) | Added MP26 support. |
+| [v2.5.0-beta3](https://github.com/jfnielsen/TOPPEpsdSourceCode/releases/tag/v2.5.0-beta3) | [PulCeq v2.4.1](https://github.com/HarmonizedMRI/PulCeq/releases/tag/v2.4.1) | Added MP26 support. |
 | [v2.5.0-beta2](https://github.com/jfnielsen/TOPPEpsdSourceCode/releases/tag/v2.5.0-beta2) | [PulCeq v2.4.0-alpha](https://github.com/HarmonizedMRI/PulCeq/releases/tag/v2.4.0-alpha) | DV26 support. Bug fixes. |
 | [v2.5.0-beta](https://github.com/jfnielsen/TOPPEpsdSourceCode/releases/tag/v2.5.0-beta) | [PulCeq v2.4.0-alpha](https://github.com/HarmonizedMRI/PulCeq/releases/tag/v2.4.0-alpha) | Allow segments without gradients to pass heating check. |
 | [v2.4.0-alpha](https://github.com/jfnielsen/TOPPEpsdSourceCode/releases/tag/v2.4.0-alpha) | [PulCeq v2.3.0-alpha](https://github.com/HarmonizedMRI/PulCeq/releases/tag/v2.3.0-alpha) | Remove limit on total number of Pulseq blocks. |
@@ -170,6 +191,7 @@ Time to turn ADC OFF = 0us
 ```
 
 The key thing to note is that the dead/ringdown intervals from one RF/ADC event must not overlap with those from another RF/ADC event.
+For more information, see https://github.com/HarmonizedMRI/PulCeq/tree/tv7/matlab/%2Bpge2.
 
 Also note that these times do NOT necessarily correspond to the values of `rfDeadTime`, `rfRingdownTime`, and `adcDeadTime`
 you should use when creating the .seq file.
