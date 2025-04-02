@@ -32,9 +32,9 @@ Instructions are available here: https://github.com/jfnielsen/TOPPEpsdSourceCode
 
 To execute a Pulseq (.seq) file using the pge2 GE interpreter:
 
-1. Create the .seq more or less as one usually does, but see the information below about adding TRID labels and other considerations.
+1. Create the .seq file more or less as one usually does, but see the information below about adding TRID labels and other considerations.
 
-2. Convert the .seq file to a Ceq sequence object. In MATLAB, do:
+2. Convert the .seq file to a PulCeq sequence object. In MATLAB, do:
     ```matlab
     system('git clone --branch v2.4.1 git@github.com:HarmonizedMRI/PulCeq.git');
     addpath PulCeq/matlab
