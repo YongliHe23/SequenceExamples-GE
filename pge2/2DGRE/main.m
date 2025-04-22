@@ -9,14 +9,26 @@ if createSequenceFile
     write2DGRE;   % writes .seq file, and sets pislquant
 
     % Convert .seq file to a PulCeq (Ceq) object
-    system('git clone --branch v2.4.0-alpha git@github.com:HarmonizedMRI/PulCeq.git');
+    system('git clone --branch v2.4.1 git@github.com:HarmonizedMRI/PulCeq.git');
     addpath PulCeq/matlab
     ceq = seq2ceq('gre2d.seq');
+
+    % Check the ceq object:
+    % Define hardware parameters, and
+    % check if 'ceq' is compatible with the parameters in 'sys'
+    psd_rf_wait = 150e-6;  % RF-gradient delay, scanner specific (s)
+    psd_grd_wait = 120e-6; % ADC-gradient delay, scanner specific (s)
+    b1_max = 0.25;         % Gauss
+    g_max = 5;             % Gauss/cm
+    slew_max = 20;         % Gauss/cm/ms
+    gamma = 4.2576e3;      % Hz/Gauss
+    sys = pge2.getsys(psd_rf_wait, psd_grd_wait, b1_max, g_max, slew_max, gamma);
+    pge2.validate(ceq, sys);
+
+    % Write ceq object to file.
+    % pislquant is the number of ADC events used to set Rx gains in Auto Prescan
     writeceq(ceq, 'gre2d.pge', 'pislquant', pislquant);
 end
-
-% Next, run gre2d.pge on a GE scanner using the pge2 interpreter.
-% See README.md
 
 if reconstruct
     system('git clone --depth 1 --branch v1.9.0 git@github.com:toppeMRI/toppe.git');

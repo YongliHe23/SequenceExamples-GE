@@ -8,6 +8,7 @@ https://github.com/jfnielsen/TOPPEpsdSourceCode/tree/UserGuide/v7/examples/2DGRE
 Tested on the following system(s):  
 | Scanner | Scanner SW version | pge2 version | PulCeq version |  
 | --- | --- | --- | --- |
+| GE UHP | MR30.1\_R01 | [v2.5.0-beta3](https://github.com/jfnielsen/TOPPEpsdSourceCode/releases/tag/v2.5.0-beta3) | [v2.4.1](https://github.com/HarmonizedMRI/PulCeq/releases/tag/v2.4.1) |  
 | GE MR750 | MR30.1\_R01 | [v2.5.0-beta](https://github.com/jfnielsen/TOPPEpsdSourceCode/releases/tag/v2.5.0-beta) | [v2.4.0-alpha](https://github.com/HarmonizedMRI/PulCeq/releases/tag/v2.4.0-alpha) |  
 | GE MR750 | MR30.1\_R01 | [v2.3.0](https://github.com/jfnielsen/TOPPEpsdSourceCode/releases/tag/v2.3.0) | [v2.2.2](https://github.com/HarmonizedMRI/PulCeq/releases/tag/v2.2.2) |
 
