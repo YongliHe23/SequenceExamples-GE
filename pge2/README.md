@@ -77,6 +77,17 @@ We recommend starting with the example in [2DGRE](2DGRE).
 For information about accessing and using the pge2 interpreter, see information below.
 
 
+### Discussion forum
+
+We encourage you to post questions/suggestions about Pulseq on GE on the
+[discussion forum](https://github.com/jfnielsen/TOPPEpsdSourceCode/discussions/)
+on the EPIC source code repository Github site.
+
+Bug reports can be submitted to the
+[Issues forum](https://github.com/jfnielsen/TOPPEpsdSourceCode/issues/),
+also on the EPIC source code site.
+
+
 ### Differences from the tv6 interpreter
 
 Compared to tv6, the main features of the pge2 interpreter are:
