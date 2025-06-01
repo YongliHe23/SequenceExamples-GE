@@ -10,6 +10,9 @@ Tested on the following system(s):
 To download the required MATLAB packages,
 create the pge sequence file, and reconstruct the data, see `main.m` in this folder.
 
+Sequence plot using GE's Pulse View (https://github.com/GEHC-External/pulse-view):  
+![Sequence plot](PulseView.png)
+
 Example reconstruction result with PinvRecon\_IntSpiral:  
 ![Example image](1.png)
 
@@ -20,4 +23,3 @@ Important points to note when preparing a .seq file containing rotated gradients
   within a segment independently.
 
 See also https://github.com/HarmonizedMRI/SequenceExamples-GE/tree/main/pge2/
-
