@@ -281,7 +281,7 @@ The Pulseq on GE v1 (tv6) user guide pdf discusses some of these points in more 
 
 ## Executing the pge file on the scanner
 
-For scan instructions, see https://github.com/jfnielsen/TOPPEpsdSourceCode/tree/UserGuide/v7
+For scan instructions and troubleshooting tips, see https://github.com/jfnielsen/TOPPEpsdSourceCode/tree/UserGuide/v7
 
 
 ## Safety management
@@ -301,16 +301,4 @@ does not exceed that in the first 64,000 blocks.
 This limit (64,000) is due to apparent memory limitations and has been determined empirically.
 
 
-## Troubleshooting tips
-
-### The sequence fails when clicking 'Download' on the scanner console
-
-Possible causes:
-* One or more segments does not contain at least one rf or gradient event, as required by the sliding-window rf/gradient heating check.
-
-
- ### The scanner reports that the RF power/SAR exceeds system limit
-
-* The sliding-window RF/SAR check can fail if your sequence contains delays on the order of the sliding window width (default is 10s).
-  This will hopefully be fixed in the future, but for now you will need to redesign your sequence.
 
