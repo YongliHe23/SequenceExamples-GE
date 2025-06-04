@@ -6,7 +6,6 @@
 [Creating the .seq file](#creating-the-pulseq-file)  
 [Executing the pge file on the scanner](#executing-the-pge-file-on-the-scanner)  
 [Safety management](#safety-management)  
-[Troubleshooting tips](#troubleshooting-tips)
 
 
 
