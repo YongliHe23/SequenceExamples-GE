@@ -1,16 +1,16 @@
 % Write magnetization-prepared stack of spirals sequence for pge2 Pulseq interpreter
 
-% the official Pulseq toolbox
-system('git clone --branch v1.5.0 git@github.com:pulseq/pulseq.git');
-addpath pulseq/matlab
-
+% % the official Pulseq toolbox
+% system('git clone --branch v1.5.0 git@github.com:pulseq/pulseq.git');
+% addpath pulseq/matlab
+% 
 % functions for converting a Pulseq file (.seq) to a format suitable for GE
 system('git clone --branch v2.4.0-alpha git@github.com:HarmonizedMRI/PulCeq.git');
 addpath PulCeq/matlab
-
-% we also need a few helper functions from here (for now)
-system('git clone --branch v1.9.1 git@github.com:toppeMRI/toppe.git');   
-addpath toppe
+% 
+% % we also need a few helper functions from here (for now)
+% system('git clone --branch v1.9.1 git@github.com:toppeMRI/toppe.git');   
+% addpath toppe
 
 % System/design parameters
 %sys = mr.opts('maxGrad', 26, 'gradUnit','mT/m', ...

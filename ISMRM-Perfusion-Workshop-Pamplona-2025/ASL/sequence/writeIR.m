@@ -16,8 +16,10 @@ save TI TI
 trid_recover = TRIDs(end);  TRIDs(end) = [];
 
 textprogressbar('Creating IR sequence: ');
+%fprintf('Creating IR sequence: ')
 for n = 1:length(TI)
     textprogressbar(n/length(TI)*100);
+    %fprintf('Progress:%.3f\n',n/length(TI)*100);
 
     % inversion pulse
     seqappend(seq, sections.inv);
