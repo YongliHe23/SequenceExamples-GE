@@ -119,6 +119,11 @@ if reconstruct
     [~, im1] = ift3(d1, 'type', '2d');
     [~, im2] = ift3(d2, 'type', '2d');
 
+    % flip dimensions to match image displayed on console for matching 2D SPGR sequence
+    im1 = flipdim(im1, 2);
+    im2 = flipdim(im2, 2);
+    im2 = flipdim(im2, 1);
+
     subplot(121); im(im1); title('echo 1 (192x192, dwell = 20us)');
     subplot(122); im(im2); title('echo 2 (48x192, dwell = 40us)');
 
