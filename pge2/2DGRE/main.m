@@ -63,10 +63,15 @@ if createSequenceFile
     pge2.validate(psq, sysGE, seq, [], 'row', 1000, 'plot', true);
 
     %---------------------------------------------------------------
-    % Write PulSeg object to .pge file
+    % Apply slice offset and write PulSeg object to .pge file.
+    % x/y/zloc are obtained from the User CVs menu on the console.
     % pislquant = # of ADC events used to set Rx gains in Auto Prescan
     %---------------------------------------------------------------
-    pge2.serialize(psq, [fn '.pge'], 'pislquant', pislquant, 'params', params);
+    xloc = 0;
+    yloc = 0;
+    zloc = 3.2e-2;   % m
+    psq = pge2.translateFOVrf(psq, [xloc yloc zloc]);
+    pge2.serialize(psq, [fn '.pge'], 'pislquant', 10, 'params', params, 'checkHash', false);
 
     %---------------------------------------------------------------
     % Validate the GE simulator XML output (created by WTools/Pulse View)
