@@ -15,6 +15,10 @@ Workflow
    >> main
    ```
 
-3. Copy `sliceprofile.pge` to your GE scanner and run it using the pge2 interpreter, https://github.com/GEHC-External/pulseq-ge-interpreter/
+   You should see the simulated slice profile:  
+   <img width="610" height="599" alt="image" src="https://github.com/user-attachments/assets/1123e9ef-61b7-42a0-9b25-493be291ca77" />
+
+
+4. Copy `sliceprofile.pge` to your GE scanner and run it using the pge2 interpreter, https://github.com/GEHC-External/pulseq-ge-interpreter/
 
    
