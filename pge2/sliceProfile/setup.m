@@ -11,6 +11,10 @@ addpath(genpath('pulseg/matlab/third_party'));
 system('git clone git@github.com:HarmonizedMRI/pge2.git');
 addpath pge2/matlab
 
+system('git clone --branch v1.9.1 git@github.com:toppeMRI/toppe.git');
+addpath toppe
+
+
 % To load the ScanArchive raw data files you will need the Orchestra toolbox
 % which is available for download at http://weconnect.gehealthcare.com/ 
 % addpath ~/Programs/orchestra-sdk-2.1-1.matlab/
