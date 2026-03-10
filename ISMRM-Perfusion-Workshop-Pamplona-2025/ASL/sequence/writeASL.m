@@ -31,7 +31,8 @@ for f = 1:nFrames
     for label = 1:2  % tag or control
         % reset pulse: saturate and wait, to put spins in a consistent starting state
         seqappend(seq, sections.sat);
-        seq.addBlock(gdummy, mr.makeDelay(delays.reset - sections.sat.duration - endOfSegmentGap)); 
+        %seq.addBlock(gdummy, mr.makeDelay(delays.reset - sections.sat.duration - endOfSegmentGap)); 
+        seq.addBlock(mr.makeDelay(delays.reset - sections.sat.duration - endOfSegmentGap)); % no need to add gdummy for newer pge2
         
         % ASL label
         switch label
@@ -40,13 +41,16 @@ for f = 1:nFrames
             case 2
                 seqappend(seq, sections.control);
         end
-        seq.addBlock(sections.gdummy, mr.makeDelay(delays.delta1 - endOfSegmentGap)); 
+        %seq.addBlock(sections.gdummy, mr.makeDelay(delays.delta1 - endOfSegmentGap));
+        seq.addBlock(mr.makeDelay(delays.delta1 - endOfSegmentGap));
 
         % background suppression
         seqappend(seq, sections.inv);
-        seq.addBlock(sections.gdummy, mr.makeDelay(delays.delta2 - sections.inv.duration - endOfSegmentGap)); 
+        %seq.addBlock(sections.gdummy, mr.makeDelay(delays.delta2 - sections.inv.duration - endOfSegmentGap)); 
+        seq.addBlock(mr.makeDelay(delays.delta2 - sections.inv.duration - endOfSegmentGap)); 
         seqappend(seq, sections.inv);
-        seq.addBlock(sections.gdummy, mr.makeDelay(delays.delta3));
+        %seq.addBlock(sections.gdummy, mr.makeDelay(delays.delta3));
+        seq.addBlock(mr.makeDelay(delays.delta3));
 
         % vascular crusher
         seqappend(seq, sections.vascsuppress);

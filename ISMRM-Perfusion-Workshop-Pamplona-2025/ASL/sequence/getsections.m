@@ -61,7 +61,7 @@ sections.tag.setDefinition('Name', 'tag');
 sections.control = mr.Sequence(sys);           
 label = 2;
 sections.control.addBlock(rf{label}, g{label}, mr.makeLabel('SET', 'TRID', TRIDs(end)));
-sections.tag.addBlock(sections.gdummy, mr.makeDelay(1e-3));  % a segment needs more than one block
+sections.control.addBlock(sections.gdummy, mr.makeDelay(1e-3));  % a segment needs more than one block
 TRIDs(end) = [];
 sections.control.setDefinition('Name', 'control');
 

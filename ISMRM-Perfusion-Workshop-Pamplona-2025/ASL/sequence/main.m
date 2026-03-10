@@ -1,16 +1,16 @@
 % Write magnetization-prepared stack of spirals sequence for pge2 Pulseq interpreter
 
 % % the official Pulseq toolbox
-% system('git clone --branch v1.5.0 git@github.com:pulseq/pulseq.git');
-% addpath pulseq/matlab
+system('git clone --branch v1.5.0 git@github.com:pulseq/pulseq.git');
+addpath pulseq/matlab
 % 
 % functions for converting a Pulseq file (.seq) to a format suitable for GE
-system('git clone --branch v2.4.0-alpha git@github.com:HarmonizedMRI/PulCeq.git');
-addpath PulCeq/matlab
+% system('git clone --branch v2.4.0-alpha git@github.com:HarmonizedMRI/PulCeq.git');
+% addpath PulCeq/matlab
 % 
-% % we also need a few helper functions from here (for now)
-% system('git clone --branch v1.9.1 git@github.com:toppeMRI/toppe.git');   
-% addpath toppe
+% we also need a few helper functions from here (for now)
+system('git clone --branch v1.9.1 git@github.com:toppeMRI/toppe.git');   
+addpath toppe
 
 % System/design parameters
 %sys = mr.opts('maxGrad', 26, 'gradUnit','mT/m', ...
@@ -37,7 +37,7 @@ TRIDs = 100:-1:1;   % any set of unique integers, in no particular order
 % See https://github.com/HarmonizedMRI/SequenceExamples-GE/tree/main/pge2
 endOfSegmentGap = 116e-6;   % sec
 
-% % write ir.seq and convert to ir.pge for execution on GE
+% write ir.seq and convert to ir.pge for execution on GE
 % fn = 'ir';
 % TRIDs = writeIR(sys, sections, fn, TRIDs);
 % ceq = seq2ceq([fn '.seq']);
@@ -59,3 +59,15 @@ pislquant = readout.nz;   % number of ADC events used for receive gain calibrati
 writeceq(ceq, [fn '.pge'], 'pislquant', pislquant);
 
 save readout readout
+
+%% plot ceq
+psd_rf_wait = 150e-6;  % RF-gradient delay, scanner specific (s)
+psd_grd_wait = 120e-6; % ADC-gradient delay, scanner specific (s)
+b1_max = 0.25;         % Gauss
+g_max = 5;             % Gauss/cm
+slew_max = 20;         % Gauss/cm/ms
+gamma = 4.2576e3;      % Hz/Gauss
+sys_pge = pge2.getsys(psd_rf_wait, psd_grd_wait, b1_max, g_max, slew_max, gamma);
+
+figure
+pge2.plot(ceq,sys_pge)

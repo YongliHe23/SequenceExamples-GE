@@ -19,4 +19,5 @@
 *.vscode/
 ISMRM-Perfusion-Workshop-Pamplona-2025/ASL/sequence/PulCeq/
 ISMRM-Perfusion-Workshop-Pamplona-2025/ASL/process/PulCeq/
-
+ISMRM-Perfusion-Workshop-Pamplona-2025/ASL/sequence/pulseq/
+ISMRM-Perfusion-Workshop-Pamplona-2025/ASL/sequence/toppe/
