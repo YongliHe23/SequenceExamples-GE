@@ -14,7 +14,7 @@
 %        moving the time marker within the segment.
 %    (2) those with variable duration throughout the scan. 
 %        The pge2 interpreter implements these by creating a WAIT pulse
-%        whose duration varies dynamically as specified in the ceq.loop array.
+%        whose duration varies dynamically as specified in the psq.loop array.
 %    It is good to be aware of the difference, since the presence of WAIT pulses
 %    can potentially interfere with other nearby Pulseq events (RF and ADC).
 %    Varying the duration of a pure delay block does not require a new TRID to be assigned.
@@ -83,7 +83,7 @@ pe_scales = phase_areas/gy_pre.area;
 gx_spoil = mr.makeTrapezoid('x', 'Area', 2*n_x*delta_kx, 'system', sys);
 gz_spoil = mr.makeTrapezoid('z', 'Area', 4/slice_thickness, 'system', sys);
 
-% Done creating events. These will become the 'base blocks' in the Ceq sequence representation.
+% Done creating events. These will become the 'base blocks' in the PulSeg sequence representation.
 % Next, define the scan loop, where we will NOT define any new events, since any events
 % defined on the fly *might* differ from those defined above in sometimes subtle ways.
 % The only exception is that it is safe to create pure delay blocks with mr.makeDelay(), 
