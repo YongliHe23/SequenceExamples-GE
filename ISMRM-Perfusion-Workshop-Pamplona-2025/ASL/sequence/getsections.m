@@ -137,8 +137,8 @@ sections.inv.addBlock(gspoil);
 TRIDs(end) = [];
 					  
 % stack of spirals readout
-readout.fov = [240e-3 240e-3 150e-3];   % FOV (m)
-readout.nx = 64; readout.nz = 30; readout.nleaf = 1;
+readout.fov = [240e-3 240e-3 50e-3];   % FOV (m)
+readout.nx = 64; readout.nz = 10; readout.nleaf = 3;
 FLIP = 10*ones(readout.nz*readout.nleaf,1);  % constant flip angle
 [sections.acquire, readout.kx, readout.ky] = getSoSreadout(sys, readout.fov, readout.nx, ...
     readout.nz, readout.nleaf, TRIDs(end), FLIP);

@@ -37,22 +37,22 @@ TRIDs = 100:-1:1;   % any set of unique integers, in no particular order
 % See https://github.com/HarmonizedMRI/SequenceExamples-GE/tree/main/pge2
 endOfSegmentGap = 116e-6;   % sec
 
-% write ir.seq and convert to ir.pge for execution on GE
-fn = 'ir';
-TRIDs = writeIR(sys, sections, fn, TRIDs);
-ceq = seq2ceq([fn '.seq']);
-pislquant = readout.nz;   % number of ADC events used for receive gain calibration
-writeceq(ceq, [fn '.pge'], 'pislquant', pislquant);
-
-% write vir.seq and convert to vir.pge for execution on GE
-fn = 'vir';
-TRIDs = writeVIR(sys, sections, fn, TRIDs);
-ceq = seq2ceq([fn '.seq']);
-pislquant = readout.nz;   % number of ADC events used for receive gain calibration
-writeceq(ceq, [fn '.pge'], 'pislquant', pislquant);
+% % write ir.seq and convert to ir.pge for execution on GE
+% fn = 'ir';
+% TRIDs = writeIR(sys, sections, fn, TRIDs);
+% ceq = seq2ceq([fn '.seq']);
+% pislquant = readout.nz;   % number of ADC events used for receive gain calibration
+% writeceq(ceq, [fn '.pge'], 'pislquant', pislquant);
+% 
+% % write vir.seq and convert to vir.pge for execution on GE
+% fn = 'vir';
+% TRIDs = writeVIR(sys, sections, fn, TRIDs);
+% ceq = seq2ceq([fn '.seq']);
+% pislquant = readout.nz;   % number of ADC events used for receive gain calibration
+% writeceq(ceq, [fn '.pge'], 'pislquant', pislquant);
 
 % write asl.seq and convert to asl.pge for execution on GE
-fn = 'asl';
+fn = 'asl_nrot3';
 TRIDs = writeASL(sys, sections, fn, TRIDs);
 ceq = seq2ceq([fn '.seq']);
 pislquant = readout.nz;   % number of ADC events used for receive gain calibration

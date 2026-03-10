@@ -14,7 +14,8 @@ function [seq, kx, ky] = getSoSreadout(sys, fov, nx, nz, nleaf, trid, FLIP,varar
 %    varargin:
 %       - Rxy: in-plane acceleration factor
 %       - fatsat: [t/F]
-%       - ovs: [t/F] apply outer-volume suppresion or not
+%       - ovs: [t/F] assign time for outer-volume suppresion or not
+%       - ovson: [T/f] turn on OVS or not, this only has effect when arg.ovs=1
 %       - ovs_path: path to ovs tRF
 % Outputs
 %   seq     Pulseq sequence object
@@ -31,7 +32,9 @@ end
 arg.Rxy=1;
 arg.fatsat=false;
 arg.ovs=false;
+arg.ovson=true;
 arg.ovs_path='';
+arg.SAR_delay=0;
 
 arg=toppe.utils.vararg_pair(arg,varargin);
 
@@ -142,13 +145,18 @@ for iz = 1:nz
             rf_phase=mod(rf_phase+rf_inc,360.0);
         end
         if arg.ovs
-            rf_beta.phaseOffset=rf_phase/180*pi;
-
-            seq.addBlock(rf_beta,gx_beta,gy_beta,gz_beta,mr.makeLabel('SET','TRID',trid-1))
-            seq.addBlock(gxSpoil,gzSpoil)
-            
-            rf_inc=mod(rf_inc+rfSpoilingInc,360.0);
-            rf_phase=mod(rf_phase+rf_inc,360.0);
+            if arg.ovson
+                rf_beta.phaseOffset=rf_phase/180*pi;
+    
+                seq.addBlock(rf_beta,gx_beta,gy_beta,gz_beta,mr.makeLabel('SET','TRID',trid-1))
+                seq.addBlock(gxSpoil,gzSpoil)
+                
+                rf_inc=mod(rf_inc+rfSpoilingInc,360.0);
+                rf_phase=mod(rf_phase+rf_inc,360.0);
+            else
+                seq.addBlock(gx_beta,gy_beta,gz_beta,mr.makeLabel('SET','TRID',trid-1))
+                seq.addBlock(gxSpoil,gzSpoil)
+            end 
         end
 
 	    % RF spoiling
@@ -169,11 +177,13 @@ for iz = 1:nz
 
 	    % readout and spoiling
 	    seq.addBlock(mr.scaleGrad(gzPre, pe2Steps(iz)));
-	    seq.addBlock(mr.rotate('z', (leaf-1)/nleaf*2*pi,'system',sys, sp.gx, sp.gy, sp.adc));
+	    seq.addBlock(mr.rotate('z', (leaf-1)/nleaf*2*pi,'system',sys, sp.gx, sp.gy, sp.adc), ...
+            mr.makeLabel('SET','TRID',trid+leaf));
 	    seq.addBlock(mr.scaleGrad(gzPre, -pe2Steps(iz)));
 	    seq.addBlock(gxSpoil, gzSpoil);
 
 	    %-- END SEGMENT INSTANCE --%
+        seq.addBlock(mr.makeDelay(arg.SAR_delay)); %delay 10ms to satisfy SAR check
     end
 end
 textprogressbar('');

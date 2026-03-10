@@ -18,7 +18,7 @@ gdummy = mr.makeTrapezoid('x', 'Area', 0.01*64/24e-2, 'Duration', 0.1e-3, 'syste
 gdummy = mr.scaleGrad(gdummy, eps);  % don't scale to exactly 0 so the trapezoid shape is preserved in the .seq file
 
 % High-level sequence timing
-delays.reset = 2;      % delay after 90 sat pulse (s)
+delays.reset = 3;%2;      % delay after 90 sat pulse (s) %make this longer to avoid SAR issue
 delays.pld = 1.3;      % post label delay: time from end of label to start of data acquisition
 delays.delta1 = 1.07;   % delay between label and 1st inversion (BGS) pulse
 delays.delta2 = 0.12;   % delay between 1st and 2nd inversion pulse
@@ -58,7 +58,7 @@ end
 fprintf('done\n');
 
 seq.setDefinition('FOV', sections.acquire.getDefinition('FOV'));
-seq.setDefinition('Name', 'asl');
+seq.setDefinition('Name', 'asl_nrot3');
 
 % Check sequence timing
 checktiming(seq);

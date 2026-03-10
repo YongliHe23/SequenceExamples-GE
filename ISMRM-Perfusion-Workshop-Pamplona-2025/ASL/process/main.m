@@ -4,9 +4,9 @@ addpath PulCeq/matlab
 
 % load reconstructed images
 load ../data/ims
-ims = imsos; clear imsos;
+ims = imsos; clear imsos;  
 
-% smooth (in-plane)
+%% smooth (in-plane)
 nt = size(ims, 4);  % nt = 2*opnex = 2x number of control-tag pairs
 textprogressbar('smoothing: ');
 for t = 1:nt
@@ -117,3 +117,49 @@ title('label, mean magnitude image across frames');
 figure;
 im(mean(abs(lbl-ctrl),4), 2e-2*s*[0 1]); colorbar;
 title('mean(abs(label-control))');
+
+% display time course as movie
+figure;title('Spine')
+for i=1:size(ims,4)
+    im(ims(:,:,7,i))
+    pause(0.2)
+end
+
+%% Save cine as gif
+load ~/data/h5files/20250612/ims_vsasl_spinal_zerofilled.mat imsos0
+ims=imsos0;
+
+filename = 'spine_movie_zf.gif';%'spine_movie.gif'; % Output filename
+figure;
+for i = 1:size(ims, 4)
+    % Display the image
+    im(ims(:,:,7,i));
+    title('Spine');
+    drawnow;
+
+    % Capture the frame as an image
+    frame = getframe(gca);
+    img = frame2im(frame);
+    [A, map] = rgb2ind(img, 256);
+
+    % Write to the GIF File
+    if i == 1
+        imwrite(A, map, filename, 'gif', 'LoopCount', Inf, 'DelayTime', 0.2);
+    else
+        imwrite(A, map, filename, 'gif', 'WriteMode', 'append', 'DelayTime', 0.2);
+    end
+end
+
+%% Perfusion image naive
+load ~/data/h5files/20250612/ims_vsasl_brain.mat imsos
+ctrl=imsos(:,:,:,3:2:end);
+lbl=imsos(:,:,:,4:2:end);
+
+ms_nm=abs(abs(mean(ctrl,4))-abs(mean(lbl,4)))./abs(mean(ctrl,4)); %normalized
+ms=abs(abs(mean(ctrl,4))-abs(mean(lbl,4)));
+
+figure;
+im(ms,'cbar');title('Perfusion Image Brain (W/O smooth,detrend)')
+figure;
+im(ms_nm);title('Normalized Perfusion Image Brain (W/O smooth,detrend)')
+
