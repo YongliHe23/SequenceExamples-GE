@@ -37,7 +37,7 @@ if false
 else
     % FT VSI
     addpath sim
-    [rfwav, gwav] = genVSI(0, 15);    % this is the nominal tag pulse
+    [rfwav, gwav] = genVSI(0, 15, sys.gradRasterTime);    % this is the nominal tag pulse
     rfwav = [rfwav rfwav];
     gwav = [gwav abs(gwav)];
 end
@@ -71,8 +71,8 @@ sections.control.setDefinition('Name', 'control');
 % the 'velocity' profile can be measured in a stationary phantom.
 % Note that velocity-selectivity is along x (in plane).
 addpath sim
-[rfwav, gwav] = genVSI(0, 15);    % this is the nominal tag pulse
-[tmp, gwavmimick] = genVSI(pi/2, 15);   % same but with gradient blips added to mimick flow
+[rfwav, gwav] = genVSI(0, 15, sys.gradRasterTime);    % this is the nominal tag pulse
+[tmp, gwavmimick] = genVSI(pi/2, 15, sys.gradRasterTime);   % same but with gradient blips added to mimick flow
 rfwav = [rfwav rfwav rfwav];
 gwav = [gwav abs(gwav) gwavmimick];
 maxB1_G = max(abs(rfwav(:)));  % Gauss
@@ -125,7 +125,7 @@ sections.vascsuppress.setDefinition('Name', 'vascsuppress');
 % background suppression (adiabatic inversion)
 sw = 3; % kHz
 dur_ms = 3;
-rfwav = genSech180(sw, dur_ms); % raster time is 4us
+rfwav = genSech180(sw, dur_ms, sys.gradRasterTime*1e3); 
 rfamp = 0.15;  % Gauss
 %rfwav = geninv(rfamp, 672, 5, 10e-3);  % also works (observed inversion efficiency about -0.9)
 rf = mr.makeArbitraryRf(rfwav, pi/2, 'delay', sys.rfDeadTime, 'system', sys, 'use', 'excitation');
