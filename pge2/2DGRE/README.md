@@ -5,7 +5,7 @@ Be sure to read through **main.m** and **write2DGRE.m** carefully, including all
 
 Use this demo with the most recent version of the 
 **[pge2 interpreter](https://github.com/GEHC-External/pulseq-ge-interpreter)**.
-That sites also contains scanner instructions, and Issues/Discussions forums where you can post bugs and questions.
+That site also contains scanner instructions, and Issues/Discussions forums where you can post bugs and questions.
 
 To download the required MATLAB packages, generate the pge sequence file, and reconstruct the data, see **setup.m** and **main.m** in this folder.
 
